@@ -28,7 +28,7 @@ const RecentBooking = () => {
   const [page, setPage] = useState(0); // Số trang hiện tại
   const [totalPages, setTotalPages] = useState(0); // Tổng số trang từ API
 
-  const URL = "https://hotelbooking-pk94.onrender.com/payments/confirm";
+  const URL = `${import.meta.env.VITE_API_BASE_URL || "https://hotel-booking-api-xojn.onrender.com"}/payments/confirm`;
 
   useEffect(() => {
     const fetchRecentBooking = async () => {

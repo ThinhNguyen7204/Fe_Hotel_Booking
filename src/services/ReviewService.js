@@ -1,8 +1,6 @@
-import axios from "axios";
+import axios from "./customize-axios";
 
-export const api = axios.create({
-  baseURL: "https://hotelbooking-pk94.onrender.com",
-});
+export const api = axios;
 
 export const addReview = async (roomId, reviewData) => {
   try {

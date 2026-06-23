@@ -1,12 +1,6 @@
-import axios from "axios";
+import axios from "./customize-axios";
 
-const token = localStorage.getItem("token");
-export const api = axios.create({
-  baseURL: "https://hotelbooking-pk94.onrender.com",
-  headers: {
-    Authorization: `Bearer ${token}`,
-  },
-});
+export const api = axios;
 
 export async function addRoom(roomData) {
   const formData = new FormData();

@@ -1,7 +1,5 @@
-import axios from "axios";
-export const api = axios.create({
-  baseURL: "https://hotelbooking-pk94.onrender.com",
-});
+import axios from "./customize-axios";
+export const api = axios;
 export async function getReport(year) {
   try {
     const token = localStorage.getItem("token");
