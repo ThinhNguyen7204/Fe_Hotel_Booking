@@ -1,8 +1,9 @@
 import { useContext, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getRoomById } from "../../services/RoomService";
 import { toast } from "react-toastify";
 import { getReviewByRoomId } from "../../services/ReviewService";
+import UserIcon from "../../assets/img/userIcon.png";
 import AdultsDropdown from "../../components/AdultsDropdown/AdultsDropdown";
 import KidsDropdown from "../../components/KidsDropdown/KidsDropdown";
 import CheckIn from "../../components/CheckIn/CheckIn";
@@ -58,6 +59,7 @@ function RatingDisplay({ averageRating }) {
 
 const RoomDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [room, setRoom] = useState(null);
   const [checkInDate, setCheckInDate] = useState("");
   const [reviews, setReviews] = useState([]);
@@ -144,7 +146,10 @@ const RoomDetails = () => {
       );
 
       if (result.status === 200) {
-        toast.success("Booking successfully!");
+        toast.success("Booking successfully! Redirecting to payment...");
+        setTimeout(() => {
+          navigate("/recent-booking");
+        }, 1500);
       }
     } catch (error) {
       toast.error("Something went wrong. Please try again");
@@ -389,23 +394,17 @@ const RoomDetails = () => {
                       >
                         {/* Avatar */}
                         <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center">
-                          {review.user.imageUrl ? (
-                            <img
-                              src={review.user.imageUrl}
-                              alt={review.user.name || "User Avatar"}
-                              className="w-full h-full object-cover"
-                            />
-                          ) : (
-                            <span className="text-gray-500 text-sm">
-                              No Image
-                            </span>
-                          )}
+                          <img
+                            src={review.user?.imageUrl || UserIcon}
+                            alt={review.user?.name || "User Avatar"}
+                            className="w-full h-full object-cover"
+                          />
                         </div>
                         {/* Nội dung review */}
                         <div className="flex-1">
                           <div className="flex items-center">
                             <h4 className="font-semibold">
-                              {review.user.name}
+                              {review.user?.name || "Anonymous"}
                             </h4>
                             <span className="ml-auto text-yellow-500">
                               <Rating

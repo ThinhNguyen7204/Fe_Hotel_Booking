@@ -94,9 +94,11 @@ const RecentBooking = () => {
       );
       // console.log(result);
       // Kiểm tra nếu kết quả trả về status là 200 và có checkoutUrl
-      if (result.status === 200 && result.data.data.checkoutUrl) {
+      if (result.status === 200 && result.data && result.data.error === 0 && result.data.data && result.data.data.checkoutUrl) {
         // Chuyển hướng người dùng đến checkoutUrl
         window.location.href = result.data.data.checkoutUrl;
+      } else {
+        toast.error(result.data?.message || "Tạo link thanh toán thất bại!");
       }
     } catch (error) {
       console.error(error.message);

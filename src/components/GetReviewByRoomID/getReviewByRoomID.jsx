@@ -5,6 +5,7 @@ import { getReviewByRoomId } from "../../services/ReviewService"
 import moment from 'moment';
 import ReactPaginate from "react-paginate";
 import { Link, NavLink } from "react-router-dom";
+import UserIcon from "../../assets/img/userIcon.png";
 
 
 const GetReviewByRoomID = () => {
@@ -56,21 +57,15 @@ const GetReviewByRoomID = () => {
                             <div className="bg-gray-100 bg-opacity-90 rounded-lg shadow-lg p-6">
                                 <div className="flex justify-between items-center">
                                     <div className="flex items-center">
-                                        <div className="w-16 h-16 rounded-full bg-gray-300">
-                                            {item.user.imageUrl ? (
-                                                <img
-                                                    src={item.user.imageUrl}
-                                                    alt={`${item.user.name}'s avatar`}
-                                                    className="w-full h-full object-cover rounded-full"
-                                                />
-                                            ) : (
-                                                <div className="w-full h-full bg-gray-300 flex items-center justify-center text-gray-500">
-                                                    No Image
-                                                </div>
-                                            )}
+                                        <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-300">
+                                            <img
+                                                src={item.user?.imageUrl || UserIcon}
+                                                alt={`${item.user?.name || "User"}'s avatar`}
+                                                className="w-full h-full object-cover rounded-full"
+                                            />
                                         </div>
                                         <div className="ml-4">
-                                            <h4 className="text-lg font-semibold">{item.user.name}</h4>
+                                            <h4 className="text-lg font-semibold">{item.user?.name || "Anonymous"}</h4>
                                             <div className="flex space-x-1">
                                                 <span className="text-yellow-500">
                                                     {renderStars(item.reviewRate)} {/* Hiển thị số sao */}
