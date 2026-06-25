@@ -47,8 +47,8 @@ const UserProfile = () => {
 
   return (
     <>
-      <section className="py-8 px-20">
-        <div className="flex items-center gap-8">
+      <section className="py-8 px-4 md:px-20 w-full min-w-0">
+        <div className="flex flex-col sm:flex-row items-center gap-6 md:gap-8 text-center sm:text-left">
           <img
             src={user?.imageUrl || UserIcon}
             alt=""
@@ -65,8 +65,8 @@ const UserProfile = () => {
 
         {/* Form */}
         <form onSubmit={handleUpdate}>
-          <div className="flex items-center gap-5 mt-10">
-            <div className="w-1/2">
+          <div className="flex flex-col md:flex-row items-center gap-5 mt-6 md:mt-10">
+            <div className="w-full md:w-1/2">
               <div className="mb-2">Full Name</div>
               <input
                 type="text"
@@ -75,7 +75,7 @@ const UserProfile = () => {
                 onChange={(e) => setName(e.target.value)} // Cập nhật state khi người dùng nhập
               />
             </div>
-            <div className="w-1/2">
+            <div className="w-full md:w-1/2">
               <div className="mb-2">Role</div>
               <input
                 type="text"
@@ -85,8 +85,8 @@ const UserProfile = () => {
               />
             </div>
           </div>
-          <div className="flex items-center gap-5 mt-10">
-            <div className="w-1/2">
+          <div className="flex flex-col md:flex-row items-center gap-5 mt-6 md:mt-10">
+            <div className="w-full md:w-1/2">
               <div className="mb-2">Contact Number</div>
               <input
                 type="tel"
@@ -103,7 +103,7 @@ const UserProfile = () => {
                 inputMode="numeric" // Hiển thị bàn phím số trên thiết bị di động
               />
             </div>
-            <div className="w-1/2">
+            <div className="w-full md:w-1/2">
               <div className="mb-2">Email</div>
               <input
                 type="email"

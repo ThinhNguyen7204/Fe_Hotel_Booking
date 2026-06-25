@@ -144,112 +144,100 @@ const AdminBookingLatePayment = () => {
   };
 
   return (
-    <section className="p-8">
-      <h2 className="font-medium text-3xl">Booking Late Payment</h2>
-      <hr className="my-5" />
-
-      {/* <div className="flex items-center mb-6 space-x-4">
-        <div className="flex items-center">
-          <input
-            type="text"
-            placeholder="Search booking by room type..."
-            value={search}
-            onChange={handleSearchChange}
-            className="border-2 border-gray-400 p-2 w-[250px] h-[40px]"
-          />
+    <section className="p-4 md:p-8 bg-slate-50/30 min-h-screen w-full min-w-0">
+      <div className="flex justify-between items-center mb-6">
+        <div>
+          <h2 className="font-semibold text-2xl text-slate-800">Booking Late Payment</h2>
+          <p className="text-sm text-slate-500">Manage bookings with outstanding payments that require attention.</p>
         </div>
-
-        <div className="w-[200px] h-[40px] flex items-center border-2 border-gray-400">
-          <CheckStartDate
-            setCheckStartDate={setCheckStartDate}
-          ></CheckStartDate>
-        </div>
-        <div className="w-[200px] h-[40px] flex items-center border-2 border-gray-400">
-          <CheckEndDate setCheckEndDate={setCheckEndDate}></CheckEndDate>
-        </div>
-      </div> */}
+      </div>
 
       {history.length === 0 ? (
-        <p className="text-center text-lg text-gray-500">
-          {/* {debouncedSearch
-            ? "No results found."
-            : "There is no booking history."} */}
+        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-12 text-center text-slate-400">
           {"There is no booking history."}
-        </p>
+        </div>
       ) : (
-        <div className="relative overflow-x-auto rounded-lg">
-          <table className="w-full text-sm text-left text-gray-500">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-100">
-              <tr>
-                <th scope="col" className="px-6 py-3">
-                  ID
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Room Type
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Room ID
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Code
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Check-in
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Check-out
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Total Guests
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Email
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Price
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Payment Status
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {history.map((item, index) => (
-                <tr key={index} className="bg-white border-b hover:bg-gray-50">
-                  <td className="px-6 py-4">{index + 1}</td>
-                  <td className="px-6 py-4">{item.room.roomType}</td>
-                  <td className="px-6 py-4">{item.room.id}</td>
-                  <td className="px-6 py-4">{item.bookingCode}</td>
-                  <td className="px-6 py-4">{item.checkInDate}</td>
-                  <td className="px-6 py-4">{item.checkOutDate}</td>
-                  <td className="px-6 py-4">{item.totalNumOfGuest}</td>
-                  <td className="px-6 py-4">{item.user.email}</td>
-                  <td className="px-6 py-4">${item.finalPrice}</td>
-                  <td className="px-6 py-4">{item.paymentStatus}</td>
-
-                  <td className="px-6 py-4">
-                    <div className="flex items-center gap-3">
-                      <button
-                        className="font-medium text-indigo-500"
-                        onClick={() => handleViewDetails(item)}
-                      >
-                        <FaEye size={20} />
-                      </button>
-                      <button
-                        className="font-medium text-red-500"
-                        onClick={() => handleCancel(item.id)}
-                      >
-                        <FaTrash size={20} />
-                      </button>
-                    </div>
-                  </td>
+        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden p-6 w-full max-w-7xl">
+          <div className="relative overflow-x-auto">
+            <table className="w-full text-sm text-left text-slate-600">
+              <thead className="text-xs text-slate-500 uppercase bg-slate-50/75 border-b border-slate-100">
+                <tr>
+                  <th scope="col" className="px-6 py-4 font-semibold">
+                    ID
+                  </th>
+                  <th scope="col" className="px-6 py-4 font-semibold">
+                    Room Type
+                  </th>
+                  <th scope="col" className="px-6 py-4 font-semibold">
+                    Room ID
+                  </th>
+                  <th scope="col" className="px-6 py-4 font-semibold">
+                    Code
+                  </th>
+                  <th scope="col" className="px-6 py-4 font-semibold">
+                    Check-in
+                  </th>
+                  <th scope="col" className="px-6 py-4 font-semibold">
+                    Check-out
+                  </th>
+                  <th scope="col" className="px-6 py-4 font-semibold">
+                    Total Guests
+                  </th>
+                  <th scope="col" className="px-6 py-4 font-semibold">
+                    Email
+                  </th>
+                  <th scope="col" className="px-6 py-4 font-semibold">
+                    Price
+                  </th>
+                  <th scope="col" className="px-6 py-4 font-semibold">
+                    Payment Status
+                  </th>
+                  <th scope="col" className="px-6 py-4 font-semibold text-center">
+                    Actions
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {history.map((item, index) => (
+                  <tr key={index} className="bg-white hover:bg-slate-50/50 transition-colors">
+                    <td className="px-6 py-4 font-medium text-slate-900">{page * 10 + index + 1}</td>
+                    <td className="px-6 py-4 font-medium text-slate-900">{item.room.roomType}</td>
+                    <td className="px-6 py-4 text-slate-500">{item.room.id}</td>
+                    <td className="px-6 py-4 font-mono text-slate-700 text-xs font-semibold">{item.bookingCode}</td>
+                    <td className="px-6 py-4 text-slate-500">{item.checkInDate}</td>
+                    <td className="px-6 py-4 text-slate-500">{item.checkOutDate}</td>
+                    <td className="px-6 py-4 text-slate-500">{item.totalNumOfGuest}</td>
+                    <td className="px-6 py-4 text-slate-500">{item.user.email}</td>
+                    <td className="px-6 py-4 font-semibold text-slate-900">${item.finalPrice}</td>
+                    <td className="px-6 py-4">
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-100 uppercase">
+                        {item.paymentStatus || "Overdue"}
+                      </span>
+                    </td>
+
+                    <td className="px-6 py-4 text-center">
+                      <div className="flex items-center justify-center gap-1">
+                        <button
+                          className="p-1.5 rounded-lg text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-all"
+                          onClick={() => handleViewDetails(item)}
+                          title="View Details"
+                        >
+                          <FaEye size={18} />
+                        </button>
+                        <button
+                          className="p-1.5 rounded-lg text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition-all"
+                          onClick={() => handleCancel(item.id)}
+                          title="Cancel Booking"
+                        >
+                          <FaTrash size={16} />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 
@@ -257,115 +245,82 @@ const AdminBookingLatePayment = () => {
       {selectedBooking && (
         <ModalConfirm
           open={isModalOpen}
-          onClose={handleCloseModal} // Đảm bảo đóng modal đúng cách
-          title={`Booking Details - ${selectedBooking.room.roomType}`}
+          onClose={handleCloseModal}
+          title={`Booking Details - Room #${selectedBooking.room.id}`}
           message={
-            <div className="text-gray-700">
-              <div className="overflow-hidden w-[400px] h-[300px] my-4">
+            <div className="text-slate-700 space-y-4 text-sm max-w-lg">
+              <div className="overflow-hidden w-full h-[220px] rounded-xl my-2 border border-slate-100 shadow-sm">
                 <img
                   src={selectedBooking.room.roomPhotoUrl}
                   alt="Room"
-                  className="w-full object-cover"
+                  className="w-full h-full object-cover"
                 />
               </div>
-              <p>
-                <strong>Room ID:</strong> {selectedBooking.room.id}
-              </p>
-              <p>
-                <strong>Email:</strong> {selectedBooking.user.email}
-              </p>
-              <p>
-                <strong>Check-in:</strong> {selectedBooking.checkInDate}
-              </p>
-              <p>
-                <strong>Check-out:</strong> {selectedBooking.checkOutDate}
-              </p>
-              <p className="flex space-x-4">
-                <strong>Adults:</strong> {selectedBooking.numOfAdults}{" "}
-                <strong>-</strong> <strong>Children:</strong>{" "}
-                {selectedBooking.numOfChildren}
-              </p>
-              <p>
-                <strong>Booking Code:</strong> {selectedBooking.bookingCode}
-              </p>
-              <p>
-                <strong>Price:</strong> ${selectedBooking.finalPrice}
-              </p>
-              <p>
-                <strong>Facilities:</strong>
-              </p>
-              {/* Render facilities if they exist */}
-              <div className="flex flex-wrap mt-4 ml-10">
-                {selectedBooking.room?.facility ? (
-                  <>
-                    {selectedBooking.room.facility.drinkInfo && (
-                      <div className="w-1/4 mb-8">
-                        <FaCocktail
-                          className="text-yellow-500 text-2xl"
-                          title="Drink Available"
-                        />
-                      </div>
-                    )}
-                    {selectedBooking.room.facility.gymInfo && (
-                      <div className="w-1/4 mb-8">
-                        <FaStopwatch
-                          className="text-yellow-500 text-2xl"
-                          title="Gym Available"
-                        />
-                      </div>
-                    )}
-                    {selectedBooking.room.facility.breakfastInfo && (
-                      <div className="w-1/4 mb-8">
-                        <FaHotdog
-                          className="text-yellow-500 text-2xl"
-                          title="Breakfast Included"
-                        />
-                      </div>
-                    )}
-                    {selectedBooking.room.facility.poolInfo && (
-                      <div className="w-1/4 mb-8">
-                        <FaSwimmingPool
-                          className="text-yellow-500 text-2xl"
-                          title="Pool Access"
-                        />
-                      </div>
-                    )}
-                    {selectedBooking.room.facility.parkingInfo && (
-                      <div className="w-1/4 mb-8">
-                        <FaParking
-                          className="text-yellow-500 text-2xl"
-                          title="Parking Available"
-                        />
-                      </div>
-                    )}
-                    {selectedBooking.room.facility.bathInfo && (
-                      <div className="w-1/4 mb-8">
-                        <FaBath
-                          className="text-yellow-500 text-2xl"
-                          title="Bath Included"
-                        />
-                      </div>
-                    )}
-                    {selectedBooking.room.facility.coffeeInfo && (
-                      <div className="w-1/4 mb-8">
-                        <FaCoffee
-                          className="text-yellow-500 text-2xl"
-                          title="Coffee Available"
-                        />
-                      </div>
-                    )}
-                    {selectedBooking.room.facility.wifiInfo && (
-                      <div className="w-1/4 mb-8">
-                        <FaWifi
-                          className="text-yellow-500 text-2xl"
-                          title="WiFi Included"
-                        />
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <span>No facilities</span>
-                )}
+
+              <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 py-3 border-b border-slate-100 text-left">
+                <p><strong>Room Type:</strong> {selectedBooking.room.roomType}</p>
+                <p><strong>Booking Code:</strong> <span className="font-mono bg-slate-50 px-1.5 py-0.5 rounded border border-slate-150 text-xs font-semibold text-slate-800">{selectedBooking.bookingCode}</span></p>
+                <p><strong>Price:</strong> <span className="font-semibold text-slate-900">${selectedBooking.finalPrice}</span></p>
+                <p><strong>Guests:</strong> {selectedBooking.totalNumOfGuest} ({selectedBooking.numOfAdults} A, {selectedBooking.numOfChildren} C)</p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 py-3 border-b border-slate-100 text-left">
+                <p><strong>Customer Email:</strong> {selectedBooking.user.email}</p>
+                <p><strong>Payment Status:</strong> <span className="text-rose-600 font-semibold">{selectedBooking.paymentStatus}</span></p>
+                <p><strong>Check-in Date:</strong> {selectedBooking.checkInDate}</p>
+                <p><strong>Check-out Date:</strong> {selectedBooking.checkOutDate}</p>
+              </div>
+
+              <div className="text-left">
+                <p className="font-semibold mb-2 text-xs uppercase text-slate-400 tracking-wider">Facilities</p>
+                <div className="flex flex-wrap gap-2 mt-1">
+                  {selectedBooking.room?.facility ? (
+                    <>
+                      {selectedBooking.room.facility.drinkInfo && (
+                        <span className="px-2.5 py-1 bg-slate-50 border border-slate-150 rounded-lg flex items-center gap-1.5 text-xs text-slate-600">
+                          <FaCocktail className="text-indigo-500" /> Drink
+                        </span>
+                      )}
+                      {selectedBooking.room.facility.gymInfo && (
+                        <span className="px-2.5 py-1 bg-slate-50 border border-slate-150 rounded-lg flex items-center gap-1.5 text-xs text-slate-600">
+                          <FaStopwatch className="text-indigo-500" /> Gym
+                        </span>
+                      )}
+                      {selectedBooking.room.facility.breakfastInfo && (
+                        <span className="px-2.5 py-1 bg-slate-50 border border-slate-150 rounded-lg flex items-center gap-1.5 text-xs text-slate-600">
+                          <FaHotdog className="text-indigo-500" /> Breakfast
+                        </span>
+                      )}
+                      {selectedBooking.room.facility.poolInfo && (
+                        <span className="px-2.5 py-1 bg-slate-50 border border-slate-150 rounded-lg flex items-center gap-1.5 text-xs text-slate-600">
+                          <FaSwimmingPool className="text-indigo-500" /> Pool
+                        </span>
+                      )}
+                      {selectedBooking.room.facility.parkingInfo && (
+                        <span className="px-2.5 py-1 bg-slate-50 border border-slate-150 rounded-lg flex items-center gap-1.5 text-xs text-slate-600">
+                          <FaParking className="text-indigo-500" /> Parking
+                        </span>
+                      )}
+                      {selectedBooking.room.facility.bathInfo && (
+                        <span className="px-2.5 py-1 bg-slate-50 border border-slate-150 rounded-lg flex items-center gap-1.5 text-xs text-slate-600">
+                          <FaBath className="text-indigo-500" /> Bath
+                        </span>
+                      )}
+                      {selectedBooking.room.facility.coffeeInfo && (
+                        <span className="px-2.5 py-1 bg-slate-50 border border-slate-150 rounded-lg flex items-center gap-1.5 text-xs text-slate-600">
+                          <FaCoffee className="text-indigo-500" /> Coffee
+                        </span>
+                      )}
+                      {selectedBooking.room.facility.wifiInfo && (
+                        <span className="px-2.5 py-1 bg-slate-50 border border-slate-150 rounded-lg flex items-center gap-1.5 text-xs text-slate-600">
+                          <FaWifi className="text-indigo-500" /> WiFi
+                        </span>
+                      )}
+                    </>
+                  ) : (
+                    <span className="text-slate-400 text-xs">No facilities</span>
+                  )}
+                </div>
               </div>
             </div>
           }
@@ -377,30 +332,32 @@ const AdminBookingLatePayment = () => {
         onClose={() => setModalCancel(false)}
         title="Confirm cancel?"
         message="Are you sure you want to cancel this booking?"
-        onConfirm={handleCancelBooking} // Call handleDelete when confirmed
+        onConfirm={handleCancelBooking}
       />
 
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel="NEXT →"
-        onPageChange={handlePageClick}
-        forcePage={page} // Đảm bảo phản ánh đúng trạng thái trang hiện tại
-        pageRangeDisplayed={5}
-        pageCount={totalPages}
-        previousLabel="← PREVIOUS"
-        className="flex space-x-2 items-center justify-center my-8"
-        pageClassName="page-item"
-        pageLinkClassName="page-link px-4 py-2 hover:bg-gray-900/10 rounded-md shadow-2xl"
-        activeLinkClassName="active bg-black text-white" // Active page style
-        previousClassName="page-item"
-        previousLinkClassName="page-link hover:bg-gray-900/10 px-4 py-2 rounded-md"
-        nextClassName="page-item"
-        nextLinkClassName="page-link hover:bg-gray-900/10 px-4 py-2 rounded-md"
-        breakClassName="page-item"
-        breakLinkClassName="page-link"
-        disabledLinkClassName="text-gray-400 cursor-not-allowed"
-        containerClassName="pagination"
-      />
+      <div className="flex justify-center mt-6">
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="NEXT →"
+          onPageChange={handlePageClick}
+          forcePage={page}
+          pageRangeDisplayed={5}
+          pageCount={totalPages}
+          previousLabel="← PREVIOUS"
+          className="flex space-x-1.5 items-center justify-center"
+          pageClassName="page-item"
+          pageLinkClassName="px-3.5 py-2 border border-slate-200 hover:bg-slate-50 rounded-xl text-slate-600 text-sm font-medium transition-all"
+          activeLinkClassName="active bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-750"
+          previousClassName="page-item"
+          previousLinkClassName="px-3.5 py-2 border border-slate-200 hover:bg-slate-50 rounded-xl text-slate-600 text-sm font-medium transition-all"
+          nextClassName="page-item"
+          nextLinkClassName="px-3.5 py-2 border border-slate-200 hover:bg-slate-50 rounded-xl text-slate-600 text-sm font-medium transition-all"
+          breakClassName="page-item"
+          breakLinkClassName="px-3.5 py-2 text-slate-400"
+          disabledLinkClassName="opacity-50 cursor-not-allowed hover:bg-white"
+          containerClassName="pagination"
+        />
+      </div>
     </section>
   );
 };

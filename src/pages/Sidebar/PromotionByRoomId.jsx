@@ -65,82 +65,94 @@ const PromotionByRoomId = () => {
   };
 
   return (
-    <section>
-      <div className="p-8">
-        <div className="mt-4 flex items-center">
+    <section className="p-8 bg-slate-50/30 min-h-screen">
+      <div className="mb-6 flex items-center justify-between">
+        <div>
           <Link
             to="/admin/roomlist"
-            className="font-semibold hover:underline transition-all flex items-center space-x-2 px-3 py-2 bg-accent text-white rounded-md"
+            className="inline-flex items-center gap-2 px-3.5 py-2 bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-800 text-sm font-medium rounded-xl border border-slate-200 shadow-sm transition-all mb-4"
           >
-            <FaArrowLeft size={15} />
-            <div>Go back</div>
+            <FaArrowLeft size={14} />
+            <span>Back to Rooms</span>
           </Link>
+          <h2 className="font-semibold text-2xl text-slate-800">Room's Promotions</h2>
+          <p className="text-sm text-slate-500">Active discount events applied to Room #{id}.</p>
         </div>
-        <h3 className="h3 text-[45px] text-center py-12">
-          Promotion - Room {id}
-        </h3>
-        <hr className="my-5" />
+      </div>
 
-        {/* Promotion List */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mx-8">
-          {promotions.length > 0 ? (
-            promotions.map((promotion) => (
+      <div className="mt-8">
+        {promotions.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {promotions.map((promotion) => (
               <div
                 key={promotion.id}
-                className="rounded-lg p-0 shadow-2xl bg-white flex flex-col"
+                className="relative border border-slate-100 rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col"
               >
-                {/* Promotion Image - Chiếm nửa phần trên */}
-                <div className="w-full h-52">
+                {/* Promotion Image & Percent Badge */}
+                <div className="w-full h-44 relative overflow-hidden bg-slate-100">
                   <img
                     src={promotion.promotionPhotoUrl}
                     alt={promotion.description}
-                    className="w-full h-full object-cover rounded-t-lg"
+                    className="w-full h-full object-cover"
                   />
+                  <div className="absolute top-3 right-3 bg-rose-500 text-white font-bold text-xs px-2.5 py-1 rounded-lg shadow-sm">
+                    {promotion.percentOfDiscount}% OFF
+                  </div>
                 </div>
 
-                {/* Promotion Details */}
-                <div className="p-6 flex flex-col flex-1">
-                  <h3 className="text-4xl font-semibold font-primary mb-4">
-                    {promotion.promotionTitle} -{" "}
-                    <span className="text-red-700">
-                      {promotion.percentOfDiscount}%
-                    </span>
+                {/* Details */}
+                <div className="p-5 flex flex-col flex-1">
+                  <h3 className="font-semibold text-base text-slate-800 mb-1.5">
+                    {promotion.promotionTitle}
                   </h3>
-                  <p className="text-gray-600">{promotion.description}</p>
-                  {/* <p className="text-sm">
-                    Room Types:{" "}
-                    <span className="font-medium">
-                      {promotion.listRoomTypes.join(", ")}
-                    </span>
-                  </p> */}
-                  <p className="text-sm text-gray-500">
-                    Time: {promotion.startDate} to {promotion.endDate}
+                  <p className="text-sm text-slate-500 mb-4 line-clamp-2 min-h-[40px]">
+                    {promotion.description}
                   </p>
+
+                  <div className="mt-auto space-y-2 pt-3 border-t border-slate-100 text-xs text-slate-400">
+                    <div className="flex items-center justify-between">
+                      <span>Validity:</span>
+                      <span className="font-medium text-slate-600">
+                        {promotion.startDate} to {promotion.endDate}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Dashed divider line for tear-off ticket look */}
+                <div className="relative flex items-center px-5 py-1">
+                  <div className="w-full border-t border-dashed border-slate-200"></div>
+                  {/* Left Circle cutout */}
+                  <div className="absolute -left-2 w-4 h-4 bg-slate-50 border-r border-slate-100 rounded-full"></div>
+                  {/* Right Circle cutout */}
+                  <div className="absolute -right-2 w-4 h-4 bg-slate-50 border-l border-slate-100 rounded-full"></div>
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex justify-end space-x-4 mb-4 px-8">
+                <div className="p-4 bg-slate-50/50 flex justify-end gap-2 border-t border-slate-50">
                   <Link
                     to={`/admin/promotion/update/${promotion.id}`}
-                    className="bg-yellow-500 text-white px-4 py-2 rounded hover:opacity-80 transition"
+                    className="p-2 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg text-slate-600 hover:text-emerald-600 transition-colors shadow-sm"
+                    title="Edit Promotion"
                   >
-                    <FaEdit size={20} />
+                    <FaEdit size={16} />
                   </Link>
                   <button
-                    className="bg-red-500 text-white px-4 py-2 rounded hover:opacity-80 transition"
+                    className="p-2 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg text-slate-600 hover:text-rose-600 transition-colors shadow-sm"
                     onClick={() => handleDelete(promotion.id)}
+                    title="Delete Promotion"
                   >
-                    <FaTrash size={20} />
+                    <FaTrash size={16} />
                   </button>
                 </div>
               </div>
-            ))
-          ) : (
-            <p className="text-gray-500 text-center">
-              No promotions available.
-            </p>
-          )}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-12 text-center text-slate-400">
+            No promotions available.
+          </div>
+        )}
       </div>
 
       {/* Modal Confirm Delete */}
@@ -153,27 +165,29 @@ const PromotionByRoomId = () => {
       />
 
       {/* Pagination */}
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel="NEXT →"
-        onPageChange={handlePageClick}
-        forcePage={page}
-        pageRangeDisplayed={5}
-        pageCount={totalPages}
-        previousLabel="← PREVIOUS"
-        className="flex space-x-2 items-center justify-center my-8"
-        pageClassName="page-item"
-        pageLinkClassName="page-link px-4 py-2 hover:bg-gray-900/10 rounded-md shadow-2xl"
-        activeLinkClassName="active bg-black text-white"
-        previousClassName="page-item"
-        previousLinkClassName="page-link hover:bg-gray-900/10 px-4 py-2 rounded-md"
-        nextClassName="page-item"
-        nextLinkClassName="page-link hover:bg-gray-900/10 px-4 py-2 rounded-md"
-        breakClassName="page-item"
-        breakLinkClassName="page-link"
-        disabledLinkClassName="text-gray-400 cursor-not-allowed"
-        containerClassName="pagination"
-      />
+      <div className="flex justify-center mt-8">
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="NEXT →"
+          onPageChange={handlePageClick}
+          forcePage={page}
+          pageRangeDisplayed={5}
+          pageCount={totalPages}
+          previousLabel="← PREVIOUS"
+          className="flex space-x-1.5 items-center justify-center"
+          pageClassName="page-item"
+          pageLinkClassName="px-3.5 py-2 border border-slate-200 hover:bg-slate-50 rounded-xl text-slate-600 text-sm font-medium transition-all"
+          activeLinkClassName="active bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-750"
+          previousClassName="page-item"
+          previousLinkClassName="px-3.5 py-2 border border-slate-200 hover:bg-slate-50 rounded-xl text-slate-600 text-sm font-medium transition-all"
+          nextClassName="page-item"
+          nextLinkClassName="px-3.5 py-2 border border-slate-200 hover:bg-slate-50 rounded-xl text-slate-600 text-sm font-medium transition-all"
+          breakClassName="page-item"
+          breakLinkClassName="px-3.5 py-2 text-slate-400"
+          disabledLinkClassName="opacity-50 cursor-not-allowed hover:bg-white"
+          containerClassName="pagination"
+        />
+      </div>
     </section>
   );
 };

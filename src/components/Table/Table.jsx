@@ -73,231 +73,212 @@ const Table = () => {
 
   return (
     <>
-      <div className="relative overflow-x-auto rounded-lg">
-        <div className="flex justify-end mb-4">
+      <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden p-6">
+        <div className="flex justify-between items-center mb-6">
+          <h3 className="font-semibold text-lg text-slate-800">Rooms Database</h3>
           <Link
             to="/admin/addroom"
-            className="bg-accent hover:opacity-60 transition-all text-white font-medium text-[17px] py-2 px-4 rounded-lg"
+            className="bg-indigo-600 hover:bg-indigo-700 active:scale-95 transition-all text-white font-medium text-sm py-2.5 px-4 rounded-xl shadow-sm shadow-indigo-100 flex items-center gap-2"
           >
             Add new room
           </Link>
         </div>
 
-        <table className="w-full text-sm text-left rtl:text-right text-gray-500">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-100">
-            <tr>
-              <th scope="col" className="px-6 py-3">
-                ID
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Type
-              </th>
-              <th scope="col" className="px-4 py-3">
-                Size m²
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Price
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Description
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Status
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Capacity
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Amount
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Image
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Facilities
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Actions
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Reviews
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {rooms.length > 0 ? (
-              rooms.map((room, index) => (
-                <tr
-                  key={room.id}
-                  className="bg-white border-b hover:bg-gray-50"
-                >
-                  <td className="px-6 py-4">{index + 1}</td>
-                  <td className="px-6 py-4">{room.roomType}</td>
-                  <td className="px-6 py-4">{room.roomSize}</td>
-                  <td className="px-6 py-4">${room.roomPrice}</td>
-                  <td className="px-6 py-4">
-                    {room.roomDescription.length > 30
-                      ? room.roomDescription.slice(0, 30) + "..."
-                      : room.roomDescription}
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center">
-                      <div
-                        className={`h-2.5 w-2.5 rounded-full ${
-                          room.roomStatus === "Available"
-                            ? "bg-green-500"
-                            : "bg-red-500"
-                        } mr-2`}
-                      ></div>
-                      {room.roomStatus}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4">{room.roomCapacity}</td>
-                  <td className="px-6 py-4">{room.roomAmount}</td>
-                  <td className="px-6 py-4">
-                    <img
-                      className="w-100 h-100"
-                      src={room.roomPhotoUrl}
-                      alt="Room"
-                    />
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="flex flex-wrap justify-left gap-1">
-                      {room.facility ? (
-                        <>
-                          {room.facility.drinkInfo && (
-                            <div className="flex items-center justify-center w-1/4">
-                              <FaCocktail
-                                className="text-yellow-500"
-                                title="Drink Available"
-                              />
-                            </div>
-                          )}
-                          {room.facility.gymInfo && (
-                            <div className="flex items-center justify-center w-1/4">
-                              <FaStopwatch
-                                className="text-yellow-500"
-                                title="Gym Available"
-                              />
-                            </div>
-                          )}
-                          {room.facility.breakfastInfo && (
-                            <div className="flex items-center justify-center w-1/4">
-                              <FaHotdog
-                                className="text-yellow-500"
-                                title="Breakfast Included"
-                              />
-                            </div>
-                          )}
-                          {room.facility.poolInfo && (
-                            <div className="flex items-center justify-center w-1/4">
-                              <FaSwimmingPool
-                                className="text-yellow-500"
-                                title="Pool Access"
-                              />
-                            </div>
-                          )}
-                          {room.facility.parkingInfo && (
-                            <div className="flex items-center justify-center w-1/4">
-                              <FaParking
-                                className="text-yellow-500"
-                                title="Parking Available"
-                              />
-                            </div>
-                          )}
-                          {room.facility.bathInfo && (
-                            <div className="flex items-center justify-center w-1/4">
-                              <FaBath
-                                className="text-yellow-500"
-                                title="Bath Included"
-                              />
-                            </div>
-                          )}
-                          {room.facility.coffeeInfo && (
-                            <div className="flex items-center justify-center w-1/4">
-                              <FaCoffee
-                                className="text-yellow-500"
-                                title="Coffee Available"
-                              />
-                            </div>
-                          )}
-                          {room.facility.wifiInfo && (
-                            <div className="flex items-center justify-center w-1/4">
-                              <FaWifi
-                                className="text-yellow-500"
-                                title="WiFi Included"
-                              />
-                            </div>
-                          )}
-                        </>
+        <div className="relative overflow-x-auto">
+          <table className="w-full text-sm text-left text-slate-600">
+            <thead className="text-xs text-slate-500 uppercase bg-slate-50/75 border-b border-slate-100">
+              <tr>
+                <th scope="col" className="px-6 py-4 font-semibold">
+                  ID
+                </th>
+                <th scope="col" className="px-6 py-4 font-semibold">
+                  Type
+                </th>
+                <th scope="col" className="px-4 py-4 font-semibold">
+                  Size m²
+                </th>
+                <th scope="col" className="px-6 py-4 font-semibold">
+                  Price
+                </th>
+                <th scope="col" className="px-6 py-4 font-semibold">
+                  Description
+                </th>
+                <th scope="col" className="px-6 py-4 font-semibold">
+                  Status
+                </th>
+                <th scope="col" className="px-6 py-4 font-semibold">
+                  Capacity
+                </th>
+                <th scope="col" className="px-6 py-4 font-semibold">
+                  Amount
+                </th>
+                <th scope="col" className="px-6 py-4 font-semibold">
+                  Image
+                </th>
+                <th scope="col" className="px-6 py-4 font-semibold">
+                  Facilities
+                </th>
+                <th scope="col" className="px-6 py-4 font-semibold text-center">
+                  Actions
+                </th>
+                <th scope="col" className="px-6 py-4 font-semibold text-center">
+                  Reviews
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100">
+              {rooms.length > 0 ? (
+                rooms.map((room, index) => (
+                  <tr
+                    key={room.id}
+                    className="bg-white hover:bg-slate-50/50 transition-colors"
+                  >
+                    <td className="px-6 py-4 font-medium text-slate-900">{page * 10 + index + 1}</td>
+                    <td className="px-6 py-4 font-medium text-slate-900">{room.roomType}</td>
+                    <td className="px-6 py-4">{room.roomSize}</td>
+                    <td className="px-6 py-4 font-semibold text-slate-900">${room.roomPrice}</td>
+                    <td className="px-6 py-4 text-slate-500">
+                      {room.roomDescription.length > 30
+                        ? room.roomDescription.slice(0, 30) + "..."
+                        : room.roomDescription}
+                    </td>
+                    <td className="px-6 py-4">
+                      {room.roomStatus === "Available" ? (
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100">
+                          Available
+                        </span>
                       ) : (
-                        <span>No facilities</span>
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-rose-50 text-rose-700 border border-rose-100">
+                          {room.roomStatus}
+                        </span>
                       )}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 text-center">
-                    <div className="flex items-center gap-3">
-                      <NavLink
-                        to={`/rooms/${room.id}`}
-                        className="font-medium text-indigo-500"
-                      >
-                        <FaEye size={20} />
-                      </NavLink>
+                    </td>
+                    <td className="px-6 py-4">{room.roomCapacity} guest(s)</td>
+                    <td className="px-6 py-4">{room.roomAmount}</td>
+                    <td className="px-6 py-4">
+                      <div className="w-14 h-10 rounded-lg overflow-hidden border border-slate-100 shadow-sm hover:scale-105 transition-transform duration-200">
+                        <img
+                          className="w-full h-full object-cover"
+                          src={room.roomPhotoUrl}
+                          alt="Room"
+                        />
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="flex flex-wrap gap-1 text-slate-400">
+                        {room.facility ? (
+                          <>
+                            {room.facility.drinkInfo && (
+                              <span className="p-1 bg-slate-50 rounded-md text-slate-600 hover:text-indigo-600 transition-colors" title="Drink Available">
+                                <FaCocktail size={14} />
+                              </span>
+                            )}
+                            {room.facility.gymInfo && (
+                              <span className="p-1 bg-slate-50 rounded-md text-slate-600 hover:text-indigo-600 transition-colors" title="Gym Available">
+                                <FaStopwatch size={14} />
+                              </span>
+                            )}
+                            {room.facility.breakfastInfo && (
+                              <span className="p-1 bg-slate-50 rounded-md text-slate-600 hover:text-indigo-600 transition-colors" title="Breakfast Included">
+                                <FaHotdog size={14} />
+                              </span>
+                            )}
+                            {room.facility.poolInfo && (
+                              <span className="p-1 bg-slate-50 rounded-md text-slate-600 hover:text-indigo-600 transition-colors" title="Pool Access">
+                                <FaSwimmingPool size={14} />
+                              </span>
+                            )}
+                            {room.facility.parkingInfo && (
+                              <span className="p-1 bg-slate-50 rounded-md text-slate-600 hover:text-indigo-600 transition-colors" title="Parking Available">
+                                <FaParking size={14} />
+                              </span>
+                            )}
+                            {room.facility.bathInfo && (
+                              <span className="p-1 bg-slate-50 rounded-md text-slate-600 hover:text-indigo-600 transition-colors" title="Bath Included">
+                                <FaBath size={14} />
+                              </span>
+                            )}
+                            {room.facility.coffeeInfo && (
+                              <span className="p-1 bg-slate-50 rounded-md text-slate-600 hover:text-indigo-600 transition-colors" title="Coffee Available">
+                                <FaCoffee size={14} />
+                              </span>
+                            )}
+                            {room.facility.wifiInfo && (
+                              <span className="p-1 bg-slate-50 rounded-md text-slate-600 hover:text-indigo-600 transition-colors" title="WiFi Included">
+                                <FaWifi size={14} />
+                              </span>
+                            )}
+                          </>
+                        ) : (
+                          <span className="text-slate-400 text-xs">None</span>
+                        )}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-center">
+                      <div className="flex items-center justify-center gap-1">
+                        <NavLink
+                          to={`/rooms/${room.id}`}
+                          className="p-1.5 rounded-lg text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-all"
+                          title="View Details"
+                        >
+                          <FaEye size={18} />
+                        </NavLink>
 
-                      <NavLink
-                        to={`/admin/roomlist/booking/${room.id}`}
-                        className="font-medium text-blue-500"
-                      >
-                        <FaHistory size={20} />
-                      </NavLink>
+                        <NavLink
+                          to={`/admin/roomlist/booking/${room.id}`}
+                          className="p-1.5 rounded-lg text-slate-500 hover:text-blue-600 hover:bg-blue-50 transition-all"
+                          title="Booking History"
+                        >
+                          <FaHistory size={16} />
+                        </NavLink>
 
-                      <NavLink
-                        to={`/admin/roomlist/promotion/${room.id}`}
-                        className="font-medium text-blue-500"
-                      >
-                        <BiSolidDiscount size={20} />
-                      </NavLink>
+                        <NavLink
+                          to={`/admin/roomlist/promotion/${room.id}`}
+                          className="p-1.5 rounded-lg text-slate-500 hover:text-violet-600 hover:bg-violet-50 transition-all"
+                          title="Promotions"
+                        >
+                          <BiSolidDiscount size={18} />
+                        </NavLink>
 
-                      <NavLink
-                        to={`/admin/updateRoom/${room.id}`}
-                        className="font-medium text-green-500"
-                      >
-                        <FaEdit size={20} />
-                      </NavLink>
-                      <button
-                        className="font-medium text-red-500"
-                        onClick={() => handleDeleteRoom(room.id)} // Pass room id to modal
-                      >
-                        <FaTrash size={20} />
-                      </button>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center">
+                        <NavLink
+                          to={`/admin/updateRoom/${room.id}`}
+                          className="p-1.5 rounded-lg text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 transition-all"
+                          title="Edit Room"
+                        >
+                          <FaEdit size={16} />
+                        </NavLink>
+                        <button
+                          className="p-1.5 rounded-lg text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition-all"
+                          onClick={() => handleDeleteRoom(room.id)}
+                          title="Delete Room"
+                        >
+                          <FaTrash size={16} />
+                        </button>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-center">
                       <NavLink
                         to={`/admin/get-review-by-room-id/${room.id}`}
-                        className="font-medium text-green-500"
+                        className="inline-flex items-center px-2.5 py-1 bg-slate-50 hover:bg-indigo-50 hover:text-indigo-600 text-slate-600 text-xs font-semibold rounded-lg border border-slate-100 transition-all"
                       >
-                        <button className="bg-accent hover:opacity-60 transition-all text-white font-medium text-[10px] py-2 px-3 rounded-lg">
-                          View
-                        </button>
+                        Reviews
                       </NavLink>
-                    </div>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td
+                    colSpan="12"
+                    className="px-6 py-8 text-center text-slate-400"
+                  >
+                    No rooms available
                   </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td
-                  colSpan="10"
-                  className="px-6 py-4 text-center text-gray-500"
-                >
-                  {"No rooms available"}
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* Modal xác nhận xóa */}
@@ -306,29 +287,31 @@ const Table = () => {
         onClose={() => setModalOpen(false)}
         title="Confirm delete?"
         message="Are you sure you want to delete this room?"
-        onConfirm={handleDelete} // Call handleDelete when confirmed
+        onConfirm={handleDelete}
       />
 
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel="NEXT →"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        pageCount={totalPages}
-        previousLabel="← PREVIOUS"
-        className="flex space-x-2 items-center justify-center my-8"
-        pageClassName="page-item"
-        pageLinkClassName="page-link px-4 py-2 hover:bg-gray-900/10 rounded-md shadow-2xl"
-        activeLinkClassName="active bg-black text-white" // Active page style
-        previousClassName="page-item"
-        previousLinkClassName="page-link hover:bg-gray-900/10 px-4 py-2 rounded-md"
-        nextClassName="page-item"
-        nextLinkClassName="page-link hover:bg-gray-900/10 px-4 py-2 rounded-md"
-        breakClassName="page-item"
-        breakLinkClassName="page-link"
-        disabledLinkClassName="text-gray-400 cursor-not-allowed"
-        containerClassName="pagination"
-      />
+      <div className="flex justify-center mt-6">
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="NEXT →"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={5}
+          pageCount={totalPages}
+          previousLabel="← PREVIOUS"
+          className="flex space-x-1.5 items-center justify-center"
+          pageClassName="page-item"
+          pageLinkClassName="px-3.5 py-2 border border-slate-200 hover:bg-slate-50 rounded-xl text-slate-600 text-sm font-medium transition-all"
+          activeLinkClassName="active bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-750"
+          previousClassName="page-item"
+          previousLinkClassName="px-3.5 py-2 border border-slate-200 hover:bg-slate-50 rounded-xl text-slate-600 text-sm font-medium transition-all"
+          nextClassName="page-item"
+          nextLinkClassName="px-3.5 py-2 border border-slate-200 hover:bg-slate-50 rounded-xl text-slate-600 text-sm font-medium transition-all"
+          breakClassName="page-item"
+          breakLinkClassName="px-3.5 py-2 text-slate-400"
+          disabledLinkClassName="opacity-50 cursor-not-allowed hover:bg-white"
+          containerClassName="pagination"
+        />
+      </div>
     </>
   );
 };

@@ -62,82 +62,99 @@ const DiscountEvents = () => {
   };
 
   return (
-    <section>
-      <div className="p-8">
-        <h2 className="font-medium text-3xl">Promotion</h2>
-        <hr className="my-5" />
-
-        {/* Form to add a new promotion */}
-        <div className="my-5 flex justify-end">
-          <Link
-            to="/admin/create-promotion"
-            // onClick={handleAddEvent}
-            className="bg-accent font-medium text-[17px] text-white p-2 rounded hover:opacity-60 transition-all"
-          >
-            Create Promotion
-          </Link>
+    <section className="p-8 bg-slate-50/30 min-h-screen">
+      <div className="flex justify-between items-center mb-6">
+        <div>
+          <h2 className="font-semibold text-2xl text-slate-800">Promotions & Coupons</h2>
+          <p className="text-sm text-slate-500">Create, edit, and deactivate discount events for rooms.</p>
         </div>
+        <Link
+          to="/admin/create-promotion"
+          className="bg-indigo-600 hover:bg-indigo-700 active:scale-95 transition-all text-white font-medium text-sm py-2.5 px-4 rounded-xl shadow-sm shadow-indigo-100 flex items-center gap-2"
+        >
+          Create Promotion
+        </Link>
+      </div>
 
-        {/* Promotion List */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mx-8">
-          {promotions.length > 0 ? (
-            promotions.map((promotion) => (
+      <div className="mt-8">
+        {promotions.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {promotions.map((promotion) => (
               <div
                 key={promotion.id}
-                className="rounded-lg p-0 shadow-2xl bg-white flex flex-col"
+                className="relative border border-slate-100 rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col"
               >
-                {/* Promotion Image - Chiếm nửa phần trên */}
-                <div className="w-full h-52">
+                {/* Promotion Image & Percent Badge */}
+                <div className="w-full h-44 relative overflow-hidden bg-slate-100">
                   <img
                     src={promotion.promotionPhotoUrl}
                     alt={promotion.description}
-                    className="w-full h-full object-cover rounded-t-lg"
+                    className="w-full h-full object-cover"
                   />
+                  <div className="absolute top-3 right-3 bg-rose-500 text-white font-bold text-xs px-2.5 py-1 rounded-lg shadow-sm">
+                    {promotion.percentOfDiscount}% OFF
+                  </div>
                 </div>
 
-                {/* Promotion Details */}
-                <div className="p-6 flex flex-col flex-1">
-                  <h3 className="text-4xl font-semibold font-primary mb-4">
-                    {promotion.promotionTitle} -{" "}
-                    <span className="text-red-700">
-                      {promotion.percentOfDiscount}%
-                    </span>
+                {/* Details */}
+                <div className="p-5 flex flex-col flex-1">
+                  <h3 className="font-semibold text-base text-slate-800 mb-1.5">
+                    {promotion.promotionTitle}
                   </h3>
-                  <p className="text-gray-600">{promotion.description}</p>
-                  <p className="text-sm">
-                    Room Types:{" "}
-                    <span className="font-medium">
-                      {promotion.listRoomTypes.join(", ")}
-                    </span>
+                  <p className="text-sm text-slate-500 mb-4 line-clamp-2 min-h-[40px]">
+                    {promotion.description}
                   </p>
-                  <p className="text-sm text-gray-500">
-                    Time: {promotion.startDate} to {promotion.endDate}
-                  </p>
+
+                  <div className="mt-auto space-y-2 pt-3 border-t border-slate-100 text-xs text-slate-400">
+                    <div className="flex items-center justify-between">
+                      <span>Room Types:</span>
+                      <span className="font-semibold text-slate-700 text-right capitalize truncate max-w-[150px]">
+                        {promotion.listRoomTypes.join(", ")}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span>Validity:</span>
+                      <span className="font-medium text-slate-600">
+                        {promotion.startDate} to {promotion.endDate}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Dashed divider line for tear-off ticket look */}
+                <div className="relative flex items-center px-5 py-1">
+                  <div className="w-full border-t border-dashed border-slate-200"></div>
+                  {/* Left Circle cutout */}
+                  <div className="absolute -left-2 w-4 h-4 bg-slate-50 border-r border-slate-100 rounded-full"></div>
+                  {/* Right Circle cutout */}
+                  <div className="absolute -right-2 w-4 h-4 bg-slate-50 border-l border-slate-100 rounded-full"></div>
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex justify-end space-x-4 mb-4 px-8">
+                <div className="p-4 bg-slate-50/50 flex justify-end gap-2 border-t border-slate-50">
                   <Link
                     to={`/admin/promotion/update/${promotion.id}`}
-                    className="bg-yellow-500 text-white px-4 py-2 rounded hover:opacity-80 transition"
+                    className="p-2 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg text-slate-600 hover:text-emerald-600 transition-colors shadow-sm"
+                    title="Edit Promotion"
                   >
-                    <FaEdit size={20} />
+                    <FaEdit size={16} />
                   </Link>
                   <button
-                    className="bg-red-500 text-white px-4 py-2 rounded hover:opacity-80 transition"
+                    className="p-2 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg text-slate-600 hover:text-rose-600 transition-colors shadow-sm"
                     onClick={() => handleDelete(promotion.id)}
+                    title="Delete Promotion"
                   >
-                    <FaTrash size={20} />
+                    <FaTrash size={16} />
                   </button>
                 </div>
               </div>
-            ))
-          ) : (
-            <p className="text-gray-500 text-center">
-              No promotions available.
-            </p>
-          )}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-12 text-center text-slate-400">
+            No promotions available.
+          </div>
+        )}
       </div>
 
       {/* Modal Confirm Delete */}
@@ -150,27 +167,29 @@ const DiscountEvents = () => {
       />
 
       {/* Pagination */}
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel="NEXT →"
-        onPageChange={handlePageClick}
-        forcePage={page}
-        pageRangeDisplayed={5}
-        pageCount={totalPages}
-        previousLabel="← PREVIOUS"
-        className="flex space-x-2 items-center justify-center my-8"
-        pageClassName="page-item"
-        pageLinkClassName="page-link px-4 py-2 hover:bg-gray-900/10 rounded-md shadow-2xl"
-        activeLinkClassName="active bg-black text-white"
-        previousClassName="page-item"
-        previousLinkClassName="page-link hover:bg-gray-900/10 px-4 py-2 rounded-md"
-        nextClassName="page-item"
-        nextLinkClassName="page-link hover:bg-gray-900/10 px-4 py-2 rounded-md"
-        breakClassName="page-item"
-        breakLinkClassName="page-link"
-        disabledLinkClassName="text-gray-400 cursor-not-allowed"
-        containerClassName="pagination"
-      />
+      <div className="flex justify-center mt-8">
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="NEXT →"
+          onPageChange={handlePageClick}
+          forcePage={page}
+          pageRangeDisplayed={5}
+          pageCount={totalPages}
+          previousLabel="← PREVIOUS"
+          className="flex space-x-1.5 items-center justify-center"
+          pageClassName="page-item"
+          pageLinkClassName="px-3.5 py-2 border border-slate-200 hover:bg-slate-50 rounded-xl text-slate-600 text-sm font-medium transition-all"
+          activeLinkClassName="active bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-750"
+          previousClassName="page-item"
+          previousLinkClassName="px-3.5 py-2 border border-slate-200 hover:bg-slate-50 rounded-xl text-slate-600 text-sm font-medium transition-all"
+          nextClassName="page-item"
+          nextLinkClassName="px-3.5 py-2 border border-slate-200 hover:bg-slate-50 rounded-xl text-slate-600 text-sm font-medium transition-all"
+          breakClassName="page-item"
+          breakLinkClassName="px-3.5 py-2 text-slate-400"
+          disabledLinkClassName="opacity-50 cursor-not-allowed hover:bg-white"
+          containerClassName="pagination"
+        />
+      </div>
     </section>
   );
 };

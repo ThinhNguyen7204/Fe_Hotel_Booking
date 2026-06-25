@@ -57,6 +57,17 @@ function RatingDisplay({ averageRating }) {
   );
 }
 
+const facilityItems = [
+  { key: "wifiInfo", icon: FaWifi, label: "Free WiFi" },
+  { key: "coffeeInfo", icon: FaCoffee, label: "Coffee Maker" },
+  { key: "bathInfo", icon: FaBath, label: "Bath Tub" },
+  { key: "parkingInfo", icon: FaParking, label: "Free Parking" },
+  { key: "poolInfo", icon: FaSwimmingPool, label: "Pool Access" },
+  { key: "breakfastInfo", icon: FaHotdog, label: "Breakfast" },
+  { key: "gymInfo", icon: FaStopwatch, label: "Gym Enabled" },
+  { key: "drinkInfo", icon: FaCocktail, label: "Welcome Drink" }
+];
+
 const RoomDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -182,218 +193,189 @@ const RoomDetails = () => {
   };
 
   return (
-    <section>
+    <section className="bg-slate-50/30 min-h-screen py-12">
       <div className="container mx-auto">
-        <div className="flex flex-col lg:flex-row h-full pb-24 pt-32">
+        <div className="flex flex-col lg:flex-row h-full pb-24 pt-28 gap-y-10 lg:gap-y-0">
           {/* left  */}
           <div className="w-full h-full lg:w-[60%] px-6">
-            <h2 className="h2">Room Detail - {room?.roomType}</h2>
-            <p className="mb-8">{room?.roomDescription}</p>
-            <img className="mb-8" src={room?.roomPhotoUrl} alt="" />
-            <div className="mb-8 flex items-center">
+            <h2 className="font-primary text-4xl lg:text-5xl text-slate-900 mb-4 tracking-wide font-normal">
+              Room Detail - {room?.roomType}
+            </h2>
+            <p className="text-slate-500 font-secondary text-base leading-relaxed mb-8">
+              {room?.roomDescription}
+            </p>
+            <img 
+              className="w-full h-[450px] object-cover rounded-3xl shadow-lg border border-slate-100 mb-8" 
+              src={room?.roomPhotoUrl} 
+              alt={room?.roomType} 
+            />
+            
+            {/* Room Metadata Bar */}
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-8 text-sm text-slate-500 border-y border-slate-150 py-4">
               <RatingDisplay averageRating={room?.averageRating || 0} />
-              <span className="mx-4">|</span>
-              <span className="mr-4 flex items-center gap-2">
-                <FaSuitcase className="text-accent" />{" "}
-                {/* Icon cho đặt phòng */}
-                Booked: {room?.numberOfBooking}
-              </span>
-              <span className="mx-4">|</span>
+              <span className="text-slate-200 hidden sm:inline">|</span>
               <span className="flex items-center gap-2">
-                <FaStar className="text-yellow-500" /> {/* Icon cho đánh giá */}
-                Reviews: {room?.numberOfRating}
+                <FaSuitcase className="text-accent" />
+                <span>Booked: <strong className="text-slate-800">{room?.numberOfBooking}</strong></span>
               </span>
-              <span className="mx-4">|</span>
+              <span className="text-slate-200 hidden sm:inline">|</span>
+              <span className="flex items-center gap-2">
+                <FaStar className="text-yellow-500" />
+                <span>Reviews: <strong className="text-slate-800">{room?.numberOfRating}</strong></span>
+              </span>
               {room?.percentOfDiscount > 0 && (
-                <div className=" text-sm flex flex-col items-center">
-                  <div className="bg-red-500 text-white px-3 py-1 rounded-md font-semibold mt-2 mx-4 mb-2">
-                    -{room?.percentOfDiscount}% Off
-                  </div>
-                </div>
+                <>
+                  <span className="text-slate-200 hidden sm:inline">|</span>
+                  <span className="bg-rose-500 text-white text-xs font-bold px-2.5 py-1 rounded-lg shadow-sm">
+                    -{room?.percentOfDiscount}% OFF
+                  </span>
+                </>
               )}
             </div>
 
             {/* facilities */}
             <div className="mt-12">
-              <h3 className="h3 mb-3">Room Facilities</h3>
-              <p className="mb-12">
+              <h3 className="font-primary text-2xl text-slate-900 mb-3">Room Facilities</h3>
+              <p className="text-slate-500 font-secondary text-sm leading-relaxed mb-8">
                 You are welcome to see the rooms, whose luxury and comfort will
                 help you rest and relax after a whole day of sightseeing and
-                admiring the capital city of Wielkopolska.
+                admiring the capital city.
               </p>
             </div>
 
-            {/* grid */}
-            <div className="flex flex-wrap">
+            {/* Grid of Facilities badging */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
               {room?.facility ? (
-                <>
-                  {room.facility.drinkInfo && (
-                    <div className="w-1/4 mb-8">
-                      <FaCocktail
-                        className="text-yellow-500 text-3xl"
-                        title="Drink Available"
-                      />
-                    </div>
-                  )}
-                  {room.facility.gymInfo && (
-                    <div className="w-1/4 mb-8">
-                      <FaStopwatch
-                        className="text-yellow-500 text-3xl"
-                        title="Gym Available"
-                      />
-                    </div>
-                  )}
-                  {room.facility.breakfastInfo && (
-                    <div className="w-1/4 mb-8">
-                      <FaHotdog
-                        className="text-yellow-500 text-3xl"
-                        title="Breakfast Included"
-                      />
-                    </div>
-                  )}
-                  {room.facility.poolInfo && (
-                    <div className="w-1/4 mb-8">
-                      <FaSwimmingPool
-                        className="text-yellow-500 text-3xl"
-                        title="Pool Access"
-                      />
-                    </div>
-                  )}
-                  {room.facility.parkingInfo && (
-                    <div className="w-1/4 mb-8">
-                      <FaParking
-                        className="text-yellow-500 text-3xl"
-                        title="Parking Available"
-                      />
-                    </div>
-                  )}
-                  {room.facility.bathInfo && (
-                    <div className="w-1/4 mb-8">
-                      <FaBath
-                        className="text-yellow-500 text-3xl"
-                        title="Bath Included"
-                      />
-                    </div>
-                  )}
-                  {room.facility.coffeeInfo && (
-                    <div className="w-1/4 mb-8">
-                      <FaCoffee
-                        className="text-yellow-500 text-3xl"
-                        title="Coffee Available"
-                      />
-                    </div>
-                  )}
-                  {room.facility.wifiInfo && (
-                    <div className="w-1/4 mb-8">
-                      <FaWifi
-                        className="text-yellow-500 text-3xl"
-                        title="WiFi Included"
-                      />
-                    </div>
-                  )}
-                </>
+                facilityItems.map((item) => {
+                  if (room.facility[item.key]) {
+                    const IconComponent = item.icon;
+                    return (
+                      <div key={item.key} className="flex flex-col items-center justify-center p-4 border border-slate-150 rounded-2xl bg-white shadow-sm hover:border-accent/40 transition-colors group">
+                        <IconComponent className="text-accent group-hover:scale-110 transition-transform duration-300 text-2xl mb-2" />
+                        <span className="text-[10px] font-semibold text-slate-700 font-tertiary tracking-wider uppercase text-center">{item.label}</span>
+                      </div>
+                    );
+                  }
+                  return null;
+                })
               ) : (
-                <span>No facilities</span>
+                <span className="text-slate-400 text-sm">No facilities available</span>
               )}
             </div>
           </div>
 
           {/* right  */}
-          <div className="w-full h-full lg:w-[40%]">
+          <div className="w-full h-full lg:w-[40%] px-6">
             {/* reservation  */}
-            <div className="py-8 px-6 bg-accent/20 mb-12">
-              <div className="flex flex-col space-y-4 mb-4">
-                <h3>Your Reservation</h3>
-                <div className="h-[60px]">
-                  <CheckIn setCheckInDate={setCheckInDate} />
+            <div className="bg-white rounded-3xl border border-slate-150 shadow-xl p-8 mb-12">
+              <h3 className="font-primary text-2xl text-slate-900 mb-6 font-semibold pb-3 border-b border-slate-100">Your Reservation</h3>
+              <div className="flex flex-col space-y-4 mb-6">
+                <div className="space-y-1">
+                  <label className="text-xs uppercase tracking-wider text-slate-400 font-tertiary font-bold">Check In</label>
+                  <div className="h-[54px] rounded-xl border border-slate-200 bg-white transition-all focus-within:border-accent">
+                    <CheckIn setCheckInDate={setCheckInDate} />
+                  </div>
                 </div>
-                <div className="h-[60px]">
-                  <CheckOut setCheckOutDate={setCheckOutDate} />
+                <div className="space-y-1">
+                  <label className="text-xs uppercase tracking-wider text-slate-400 font-tertiary font-bold">Check Out</label>
+                  <div className="h-[54px] rounded-xl border border-slate-200 bg-white transition-all focus-within:border-accent">
+                    <CheckOut setCheckOutDate={setCheckOutDate} />
+                  </div>
                 </div>
-                <div className="h-[60px]">
-                  <AdultsDropdown setNumOfAdults={setNumOfAdults} />
-                </div>
-                <div className="h-[60px]">
-                  <KidsDropdown setNumOfChildren={setNumOfChildren} />
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-xs uppercase tracking-wider text-slate-400 font-tertiary font-bold">Adults</label>
+                    <div className="h-[54px] rounded-xl border border-slate-200 bg-white transition-all focus-within:border-accent">
+                      <AdultsDropdown setNumOfAdults={setNumOfAdults} />
+                    </div>
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-xs uppercase tracking-wider text-slate-400 font-tertiary font-bold">Kids</label>
+                    <div className="h-[54px] rounded-xl border border-slate-200 bg-white transition-all focus-within:border-accent">
+                      <KidsDropdown setNumOfChildren={setNumOfChildren} />
+                    </div>
+                  </div>
                 </div>
               </div>
+
               <button
-                className="btn btn-lg btn-primary w-full"
+                className="w-full h-12 bg-slate-900 text-white font-tertiary uppercase text-xs tracking-[2px] rounded-xl flex items-center justify-center hover:bg-accent transition-all duration-300 shadow-md active:scale-98 font-semibold"
                 onClick={handleChecking}
               >
-                {/* book now for {room?.roomPrice}$ */}
-                Check
+                Check Availability
               </button>
 
               {checkAvailable && user.role === "USER" && (
                 <button
-                  className="btn btn-lg btn-secondary w-full mt-4 transition-all"
+                  className="w-full py-4.5 bg-accent text-white font-tertiary uppercase text-xs tracking-[2px] rounded-xl flex flex-col items-center justify-center hover:bg-accent-hover transition-all duration-300 shadow-md active:scale-98 mt-4 font-semibold px-4"
                   onClick={handleBooking}
                 >
-                  <div>
-                    {room?.percentOfDiscount > 0 ? (
-                      <>
-                        <span className="text-lg font-semibold text-grey-500">
-                          Book now - {calculatePrice()?.toLocaleString()}₫
+                  {room?.percentOfDiscount > 0 ? (
+                    <div className="text-center py-1">
+                      <div className="text-[10px] uppercase tracking-wider opacity-85 mb-0.5">Book now at discounted price:</div>
+                      <div className="flex items-center justify-center gap-x-2">
+                        <span className="text-base font-bold">
+                          {calculatePrice()?.toLocaleString()}₫
                         </span>
-                        <span className="ml-4 text-sm line-through text-gray-500">
-                          {(
-                            room?.roomPrice * countNumberOfNights()
-                          ).toLocaleString()}
-                          ₫
+                        <span className="text-xs line-through opacity-60">
+                          {(room?.roomPrice * countNumberOfNights()).toLocaleString()}₫
                         </span>
-                      </>
-                    ) : (
-                      <span className="text-lg font-semibold">
-                        Book now - {room?.roomPrice.toLocaleString()}₫
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="text-center py-1.5">
+                      <div className="text-[10px] uppercase tracking-wider opacity-85 mb-0.5">Confirm Booking:</div>
+                      <span className="text-base font-bold">
+                        {room?.roomPrice.toLocaleString()}₫
                       </span>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </button>
               )}
             </div>
 
             {/* rules */}
-            <div>
-              <h3 className="h3">Hotel Rules</h3>
-              <p className="mb-6">
+            <div className="bg-white rounded-3xl border border-slate-150 shadow-md p-8 mb-12">
+              <h3 className="font-primary text-2xl text-slate-900 mb-4 font-semibold">Hotel Rules</h3>
+              <p className="text-slate-500 font-secondary text-sm leading-relaxed mb-6">
                 Hotel management will highly appreciate your collaboration in
-                abiding by these rules and regulations, whose aim is to ensure
+                abiding by these rules and regulations, whose aim is to ensure a
                 peaceful and safe stay for our Guests.
               </p>
 
-              <ul className="flex flex-col gap-y-4">
-                <li className="flex items-center gap-x-4">
-                  <FaCheck className="text-accent" />
-                  Check-in: 3:00 PM - 9:00 PM
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <li className="flex items-center gap-x-3 text-sm text-slate-700">
+                  <FaCheck className="text-accent flex-shrink-0" />
+                  <span>Check-in: 3:00 - 9:00 PM</span>
                 </li>
-                <li className="flex items-center gap-x-4">
-                  <FaCheck className="text-accent" />
-                  Check-out: 10:30 AM
+                <li className="flex items-center gap-x-3 text-sm text-slate-700">
+                  <FaCheck className="text-accent flex-shrink-0" />
+                  <span>Check-out: 10:30 AM</span>
                 </li>
-                <li className="flex items-center gap-x-4">
-                  <FaCheck className="text-accent" />
-                  No Pets
+                <li className="flex items-center gap-x-3 text-sm text-slate-700">
+                  <FaCheck className="text-accent flex-shrink-0" />
+                  <span>No Pets</span>
                 </li>
-                <li className="flex items-center gap-x-4">
-                  <FaCheck className="text-accent" />
-                  No Smoking
+                <li className="flex items-center gap-x-3 text-sm text-slate-700">
+                  <FaCheck className="text-accent flex-shrink-0" />
+                  <span>No Smoking</span>
                 </li>
               </ul>
             </div>
-            <div className="mt-8">
-              <h3 className="h3">Reviews</h3>
+
+            {/* Reviews */}
+            <div className="bg-white rounded-3xl border border-slate-150 shadow-md p-8">
+              <h3 className="font-primary text-2xl text-slate-900 mb-6 font-semibold">Guest Reviews</h3>
               {reviews.length > 0 ? (
                 <>
-                  {/* Hiển thị danh sách reviews */}
-                  <div className="space-y-4 max-h-[500px] overflow-y-auto pr-4">
+                  <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
                     {reviews.map((review) => (
                       <div
                         key={review.id}
-                        className="bg-gray-100 bg-opacity-90 rounded-lg shadow-lg p-4 flex items-start space-x-4"
+                        className="bg-slate-50/50 rounded-2xl border border-slate-100 p-4 flex items-start space-x-4 hover:bg-slate-50 transition-colors duration-250"
                       >
                         {/* Avatar */}
-                        <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center">
+                        <div className="w-12 h-12 rounded-full overflow-hidden bg-slate-200 flex-shrink-0 shadow-inner flex items-center justify-center">
                           <img
                             src={review.user?.imageUrl || UserIcon}
                             alt={review.user?.name || "User Avatar"}
@@ -401,55 +383,59 @@ const RoomDetails = () => {
                           />
                         </div>
                         {/* Nội dung review */}
-                        <div className="flex-1">
-                          <div className="flex items-center">
-                            <h4 className="font-semibold">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+                            <h4 className="font-semibold text-slate-800 text-sm truncate">
                               {review.user?.name || "Anonymous"}
                             </h4>
-                            <span className="ml-auto text-yellow-500">
-                              <Rating
-                                name="read-only"
-                                value={review.reviewRate}
-                                precision={0.5}
-                                readOnly
-                              />
-                            </span>
+                            <Rating
+                              name="read-only"
+                              value={review.reviewRate}
+                              precision={0.5}
+                              readOnly
+                              size="small"
+                            />
                           </div>
-                          <p className="text-gray-600">{review.comment}</p>
-                          <p className="text-gray-500 text-sm">
+                          <p className="text-slate-600 text-xs leading-relaxed mb-2 break-words">
+                            {review.comment}
+                          </p>
+                          <p className="text-slate-400 text-[10px] font-medium">
                             {moment(review.createdTime).format(
-                              "MMMM Do YYYY, h:mm:ss a"
+                              "MMMM Do YYYY, h:mm a"
                             )}
                           </p>
                         </div>
                       </div>
                     ))}
                   </div>
-                  {/* ReactPaginate */}
                 </>
               ) : (
-                <p>No reviews available for this room.</p>
+                <p className="text-slate-400 text-sm italic py-4">No reviews available for this room yet.</p>
               )}
-              <ReactPaginate
-                breakLabel="..."
-                nextLabel="NEXT →"
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={5}
-                pageCount={totalPages}
-                previousLabel="← PREVIOUS"
-                className="flex space-x-2 items-center justify-center my-8"
-                pageClassName="page-item"
-                pageLinkClassName="page-link px-4 py-2 hover:bg-gray-900/10 rounded-md shadow-2xl"
-                activeLinkClassName="active bg-black text-white" // Active page style
-                previousClassName="page-item"
-                previousLinkClassName="page-link hover:bg-gray-900/10 px-4 py-2 rounded-md"
-                nextClassName="page-item"
-                nextLinkClassName="page-link hover:bg-gray-900/10 px-4 py-2 rounded-md"
-                breakClassName="page-item"
-                breakLinkClassName="page-link"
-                disabledLinkClassName="text-gray-400 cursor-not-allowed"
-                containerClassName="pagination"
-              />
+              {totalPages > 1 && (
+                <div className="flex justify-center mt-6">
+                  <ReactPaginate
+                    breakLabel="..."
+                    nextLabel="NEXT →"
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={5}
+                    pageCount={totalPages}
+                    previousLabel="← PREVIOUS"
+                    className="flex space-x-1 items-center justify-center"
+                    pageClassName="page-item"
+                    pageLinkClassName="px-3 py-1.5 border border-slate-200 hover:bg-slate-550/5 rounded-xl text-slate-600 text-[11px] font-medium transition-all"
+                    activeLinkClassName="active bg-accent text-white border-accent hover:bg-accent-hover"
+                    previousClassName="page-item"
+                    previousLinkClassName="px-3 py-1.5 border border-slate-200 hover:bg-slate-550/5 rounded-xl text-slate-600 text-[11px] font-medium transition-all"
+                    nextClassName="page-item"
+                    nextLinkClassName="px-3 py-1.5 border border-slate-200 hover:bg-slate-550/5 rounded-xl text-slate-600 text-[11px] font-medium transition-all"
+                    breakClassName="page-item"
+                    breakLinkClassName="px-3 py-1.5 text-slate-400"
+                    disabledLinkClassName="opacity-40 cursor-not-allowed hover:bg-transparent"
+                    containerClassName="pagination"
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>

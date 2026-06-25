@@ -92,7 +92,7 @@ const Header = () => {
           {/* Avatar and Username */}
           <div className="flex items-center space-x-2 lg:ml-4">
             <NavLink
-              to="/dashboard"
+              to={user?.role === "ADMIN" ? "/dashboard" : "/profile"}
               className="w-10 h-10 hover:text-accent transition-all"
             >
               <img

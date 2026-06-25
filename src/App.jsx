@@ -96,7 +96,7 @@ function App() {
         <Route
           path="/dashboard"
           element={
-            <PrivateRoute>
+            <PrivateRoute adminOnly={true}>
               <DashboardLayout>
                 <Dashboard />
               </DashboardLayout>

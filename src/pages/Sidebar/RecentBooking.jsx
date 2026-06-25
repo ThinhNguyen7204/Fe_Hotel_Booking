@@ -118,95 +118,93 @@ const RecentBooking = () => {
   };
 
   return (
-    <section>
-      <div className="container mx-auto px-8">
-        <h3 className="h3 text-[45px] text-center py-12">Recent Booking</h3>
+    <div className="p-4 md:p-8 bg-slate-50/50 min-h-screen w-full min-w-0">
+      {/* Page Header */}
+      <div className="mb-8">
+        <span className="bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
+          Current Bookings
+        </span>
+        <h1 className="text-slate-800 text-3xl font-extrabold mt-3 tracking-tight">
+          Recent Bookings
+        </h1>
+        <p className="text-slate-500 text-[15px] mt-1.5 leading-relaxed">
+          Track and manage your current reservations, check status, and complete payment.
+        </p>
+      </div>
+
+      {/* Main Content Table Card */}
+      <div className="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden p-6 w-full max-w-7xl">
         {history.length === 0 ? (
-          <p className="text-center text-lg text-white">
-            You have no booking history.
-          </p>
+          <div className="text-center py-12">
+            <p className="text-slate-400 font-medium italic">
+              You have no recent bookings.
+            </p>
+          </div>
         ) : (
-          <div className="relative overflow-x-auto rounded-lg">
-            <table className="w-full text-sm text-left text-gray-500">
-              <thead className="text-xs text-gray-700 uppercase bg-gray-100">
-                <tr>
-                  <th scope="col" className="px-6 py-3">
-                    ID
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Room Type
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Room ID
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Code
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Check-in Date
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Check-out Date
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Adults
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Children
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Price
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Payment Status
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Actions
-                  </th>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm text-left text-slate-500 border-collapse">
+              <thead>
+                <tr className="text-xs uppercase text-slate-400 border-b border-slate-100 bg-slate-50/50">
+                  <th scope="col" className="px-6 py-4 font-semibold">ID</th>
+                  <th scope="col" className="px-6 py-4 font-semibold">Room Type</th>
+                  <th scope="col" className="px-6 py-4 font-semibold">Room ID</th>
+                  <th scope="col" className="px-6 py-4 font-semibold">Code</th>
+                  <th scope="col" className="px-6 py-4 font-semibold">Check-in Date</th>
+                  <th scope="col" className="px-6 py-4 font-semibold">Check-out Date</th>
+                  <th scope="col" className="px-6 py-4 font-semibold text-center">Adults</th>
+                  <th scope="col" className="px-6 py-4 font-semibold text-center">Children</th>
+                  <th scope="col" className="px-6 py-4 font-semibold">Price</th>
+                  <th scope="col" className="px-6 py-4 font-semibold text-center">Payment Status</th>
+                  <th scope="col" className="px-6 py-4 font-semibold text-center">Actions</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-slate-100">
                 {history.map((item, index) => (
-                  <tr
-                    key={index}
-                    className="bg-white border-b hover:bg-gray-50"
-                  >
-                    <td className="px-6 py-4">{index + 1}</td>
-                    <td className="px-6 py-4">{item.room.roomType}</td>
+                  <tr key={index} className="hover:bg-slate-50/50 transition-colors">
+                    <td className="px-6 py-4 font-medium text-slate-800">{index + 1}</td>
+                    <td className="px-6 py-4 font-semibold text-slate-700">{item.room.roomType}</td>
                     <td className="px-6 py-4">{item.room.id}</td>
-                    <td className="px-6 py-4">{item.bookingCode}</td>
-                    <td className="px-6 py-4">{item.checkInDate}</td>
-                    <td className="px-6 py-4">{item.checkOutDate}</td>
-                    <td className="px-6 py-4">{item.numOfAdults}</td>
-                    <td className="px-6 py-4">{item.numOfChildren}</td>
-                    <td className="px-6 py-4">${item.finalPrice}</td>
+                    <td className="px-6 py-4 font-mono text-slate-600 font-bold">{item.bookingCode}</td>
+                    <td className="px-6 py-4 text-slate-500">{item.checkInDate}</td>
+                    <td className="px-6 py-4 text-slate-500">{item.checkOutDate}</td>
+                    <td className="px-6 py-4 text-center">{item.numOfAdults}</td>
+                    <td className="px-6 py-4 text-center">{item.numOfChildren}</td>
+                    <td className="px-6 py-4 font-semibold text-slate-900">${item.finalPrice}</td>
                     <td className="px-6 py-4">
-                      <div className="flex flex-row gap-x-1 items-center justify-center">
-                        {item.paymentStatus}
+                      <div className="flex items-center justify-center gap-2">
+                        <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${
+                          item.paymentStatus === "PAID"
+                            ? "bg-emerald-50 text-emerald-700 border border-emerald-100"
+                            : "bg-amber-50 text-amber-700 border border-amber-100"
+                        }`}>
+                          {item.paymentStatus}
+                        </span>
                         {item.paymentStatus === "UNPAID" && (
                           <button
-                            className="font-medium text-green-700"
+                            className="p-1.5 bg-indigo-50 border border-indigo-100 text-indigo-600 rounded-lg hover:bg-indigo-100 transition-colors"
                             onClick={() => handlePay(item)}
+                            title="Pay Now"
                           >
-                            <MdPayment size={22} />
+                            <MdPayment size={18} />
                           </button>
                         )}
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="text-center flex items-center gap-3">
+                      <div className="flex items-center justify-center gap-2">
                         <button
-                          className="font-medium text-indigo-500"
+                          className="p-2 text-indigo-600 hover:bg-indigo-50 rounded-xl transition-colors border border-transparent hover:border-indigo-100"
                           onClick={() => handleViewDetails(item)}
+                          title="View Details"
                         >
-                          <FaEye size={20} />
+                          <FaEye size={16} />
                         </button>
-
                         <button
-                          className="font-medium text-red-500"
+                          className="p-2 text-rose-600 hover:bg-rose-50 rounded-xl transition-colors border border-transparent hover:border-rose-100"
                           onClick={() => handleCancel(item.id)}
+                          title="Cancel Booking"
                         >
-                          <FaTrash size={20} />
+                          <FaTrash size={14} />
                         </button>
                       </div>
                     </td>
@@ -222,112 +220,62 @@ const RecentBooking = () => {
       {selectedBooking && (
         <ModalConfirm
           open={isModalOpen}
-          onClose={handleCloseModal} // Đảm bảo đóng modal đúng cách
+          onClose={handleCloseModal}
           title={`Booking Details - ${selectedBooking.room.roomType}`}
           message={
-            <div className="text-gray-700">
-              <div className="overflow-hidden w-[400px] h-[300px] my-4">
+            <div className="text-slate-700">
+              <div className="overflow-hidden w-full h-[220px] rounded-2xl border border-slate-100 mb-5">
                 <img
                   src={selectedBooking.room.roomPhotoUrl}
                   alt="Room"
-                  className="w-full object-cover"
+                  className="w-full h-full object-cover"
                 />
               </div>
-              <p>
-                <strong>Room ID:</strong> {selectedBooking.room.id}
-              </p>
-              <p>
-                <strong>Check-in:</strong> {selectedBooking.checkInDate}
-              </p>
-              <p>
-                <strong>Check-out:</strong> {selectedBooking.checkOutDate}
-              </p>
-              <p className="flex space-x-4">
-                <strong>Adults:</strong> {selectedBooking.numOfAdults}{" "}
-                <strong>-</strong> <strong>Children:</strong>{" "}
-                {selectedBooking.numOfChildren}
-              </p>
-              <p>
-                <strong>Booking Code:</strong> {selectedBooking.bookingCode}
-              </p>
-              <p>
-                <strong>Price:</strong> ${selectedBooking.finalPrice}
-              </p>
-              <p>
-                <strong>Facilities:</strong>
-              </p>
-              {/* Render facilities if they exist */}
-              <div className="flex flex-wrap mt-4 ml-10">
-                {selectedBooking.room?.facility ? (
-                  <>
-                    {selectedBooking.room.facility.drinkInfo && (
-                      <div className="w-1/4 mb-8">
-                        <FaCocktail
-                          className="text-yellow-500 text-2xl"
-                          title="Drink Available"
-                        />
-                      </div>
-                    )}
-                    {selectedBooking.room.facility.gymInfo && (
-                      <div className="w-1/4 mb-8">
-                        <FaStopwatch
-                          className="text-yellow-500 text-2xl"
-                          title="Gym Available"
-                        />
-                      </div>
-                    )}
-                    {selectedBooking.room.facility.breakfastInfo && (
-                      <div className="w-1/4 mb-8">
-                        <FaHotdog
-                          className="text-yellow-500 text-2xl"
-                          title="Breakfast Included"
-                        />
-                      </div>
-                    )}
-                    {selectedBooking.room.facility.poolInfo && (
-                      <div className="w-1/4 mb-8">
-                        <FaSwimmingPool
-                          className="text-yellow-500 text-2xl"
-                          title="Pool Access"
-                        />
-                      </div>
-                    )}
-                    {selectedBooking.room.facility.parkingInfo && (
-                      <div className="w-1/4 mb-8">
-                        <FaParking
-                          className="text-yellow-500 text-2xl"
-                          title="Parking Available"
-                        />
-                      </div>
-                    )}
-                    {selectedBooking.room.facility.bathInfo && (
-                      <div className="w-1/4 mb-8">
-                        <FaBath
-                          className="text-yellow-500 text-2xl"
-                          title="Bath Included"
-                        />
-                      </div>
-                    )}
-                    {selectedBooking.room.facility.coffeeInfo && (
-                      <div className="w-1/4 mb-8">
-                        <FaCoffee
-                          className="text-yellow-500 text-2xl"
-                          title="Coffee Available"
-                        />
-                      </div>
-                    )}
-                    {selectedBooking.room.facility.wifiInfo && (
-                      <div className="w-1/4 mb-8">
-                        <FaWifi
-                          className="text-yellow-500 text-2xl"
-                          title="WiFi Included"
-                        />
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <span>No facilities</span>
-                )}
+              <div className="grid grid-cols-2 gap-4 text-sm mb-4">
+                <div>
+                  <span className="text-slate-400 text-xs uppercase font-bold block">Room ID</span>
+                  <span className="font-semibold text-slate-800">{selectedBooking.room.id}</span>
+                </div>
+                <div>
+                  <span className="text-slate-400 text-xs uppercase font-bold block">Booking Code</span>
+                  <span className="font-mono font-bold text-slate-800">{selectedBooking.bookingCode}</span>
+                </div>
+                <div>
+                  <span className="text-slate-400 text-xs uppercase font-bold block">Check-in Date</span>
+                  <span className="font-semibold text-slate-800">{selectedBooking.checkInDate}</span>
+                </div>
+                <div>
+                  <span className="text-slate-400 text-xs uppercase font-bold block">Check-out Date</span>
+                  <span className="font-semibold text-slate-800">{selectedBooking.checkOutDate}</span>
+                </div>
+                <div>
+                  <span className="text-slate-400 text-xs uppercase font-bold block">Guests</span>
+                  <span className="font-semibold text-slate-800">{selectedBooking.numOfAdults} Adults, {selectedBooking.numOfChildren} Kids</span>
+                </div>
+                <div>
+                  <span className="text-slate-400 text-xs uppercase font-bold block">Total Price</span>
+                  <span className="font-bold text-indigo-600">${selectedBooking.finalPrice}</span>
+                </div>
+              </div>
+              
+              <div className="pt-3 border-t border-slate-100">
+                <span className="text-slate-400 text-xs uppercase font-bold block mb-3">Room Facilities</span>
+                <div className="grid grid-cols-4 gap-2">
+                  {selectedBooking.room?.facility ? (
+                    <>
+                      {selectedBooking.room.facility.wifiInfo && <FaWifi className="text-accent text-lg" title="WiFi Included" />}
+                      {selectedBooking.room.facility.coffeeInfo && <FaCoffee className="text-accent text-lg" title="Coffee Available" />}
+                      {selectedBooking.room.facility.bathInfo && <FaBath className="text-accent text-lg" title="Bath Included" />}
+                      {selectedBooking.room.facility.parkingInfo && <FaParking className="text-accent text-lg" title="Parking Available" />}
+                      {selectedBooking.room.facility.poolInfo && <FaSwimmingPool className="text-accent text-lg" title="Pool Access" />}
+                      {selectedBooking.room.facility.breakfastInfo && <FaHotdog className="text-accent text-lg" title="Breakfast Included" />}
+                      {selectedBooking.room.facility.gymInfo && <FaStopwatch className="text-accent text-lg" title="Gym Available" />}
+                      {selectedBooking.room.facility.drinkInfo && <FaCocktail className="text-accent text-lg" title="Welcome Drink" />}
+                    </>
+                  ) : (
+                    <span className="text-slate-400 text-xs col-span-4 italic">No facilities</span>
+                  )}
+                </div>
               </div>
             </div>
           }
@@ -337,32 +285,36 @@ const RecentBooking = () => {
       <ModalConfirm
         open={isModalCancel}
         onClose={() => setModalCancel(false)}
-        title="Confirm cancel?"
+        title="Cancel Booking"
         message="Are you sure you want to cancel this booking?"
-        onConfirm={handleCancelBooking} // Call handleDelete when confirmed
+        onConfirm={handleCancelBooking}
       />
 
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel="NEXT →"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        pageCount={totalPages}
-        previousLabel="← PREVIOUS"
-        className="flex space-x-2 items-center justify-center my-8"
-        pageClassName="page-item"
-        pageLinkClassName="page-link px-4 py-2 hover:bg-gray-900/10 rounded-md shadow-2xl"
-        activeLinkClassName="active bg-black text-white" // Active page style
-        previousClassName="page-item"
-        previousLinkClassName="page-link hover:bg-gray-900/10 px-4 py-2 rounded-md"
-        nextClassName="page-item"
-        nextLinkClassName="page-link hover:bg-gray-900/10 px-4 py-2 rounded-md"
-        breakClassName="page-item"
-        breakLinkClassName="page-link"
-        disabledLinkClassName="text-gray-400 cursor-not-allowed"
-        containerClassName="pagination"
-      />
-    </section>
+      {totalPages > 1 && (
+        <div className="flex justify-center mt-12 mb-8">
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel="NEXT →"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={5}
+            pageCount={totalPages}
+            previousLabel="← PREVIOUS"
+            className="flex space-x-1.5 items-center justify-center"
+            pageClassName="page-item"
+            pageLinkClassName="px-3.5 py-2 border border-slate-200 hover:bg-slate-550/5 rounded-xl text-slate-600 text-sm font-medium transition-all"
+            activeLinkClassName="active bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-700"
+            previousClassName="page-item"
+            previousLinkClassName="px-3.5 py-2 border border-slate-200 hover:bg-slate-550/5 rounded-xl text-slate-600 text-sm font-medium transition-all"
+            nextClassName="page-item"
+            nextLinkClassName="px-3.5 py-2 border border-slate-200 hover:bg-slate-550/5 rounded-xl text-slate-600 text-sm font-medium transition-all"
+            breakClassName="page-item"
+            breakLinkClassName="px-3.5 py-2 text-slate-400"
+            disabledLinkClassName="opacity-40 cursor-not-allowed hover:bg-transparent"
+            containerClassName="pagination"
+          />
+        </div>
+      )}
+    </div>
   );
 };
 

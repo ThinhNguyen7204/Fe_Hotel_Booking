@@ -97,25 +97,25 @@ const Home = () => {
       </div> */}
       {/* <Rooms /> */}
 
-      <section className="py-14">
+      <section className="py-20 bg-white">
         <div className="container mx-auto lg:px-0">
-          <div className="text-center">
-            <h2 className="font-primary text-[65px]">Aurora Grand</h2>
-            <div className="font-tertiary uppercase text-[15px] tracking-[6px]">
+          <div className="text-center mb-16">
+            <h2 className="font-primary text-5xl lg:text-[72px] text-slate-900 tracking-wide mb-3 leading-tight">Aurora Grand</h2>
+            <div className="font-tertiary uppercase text-xs lg:text-sm text-accent font-semibold tracking-[8px]">
               - Welcome to Aurora Grand Hotel -
             </div>
           </div>
 
           {/* intro  */}
-          <div className="flex flex-col lg:flex-row h-full mt-12">
+          <div className="flex flex-col lg:flex-row gap-10 items-center mt-12 px-6">
             {/* left  */}
-            <div className="w-full h-full lg:w-[65%] px-8">
-              <div className="py-8">
-                <h3 className="h3 text-[30px] mb-4">
+            <div className="w-full lg:w-[60%] lg:pr-10">
+              <div className="py-4">
+                <h3 className="font-primary text-3xl lg:text-4xl text-slate-800 mb-6 leading-snug">
                   Experience Elegance at Aurora Grand
                 </h3>
 
-                <p className="text-gray-600">
+                <p className="text-slate-500 font-secondary leading-relaxed text-base mb-8">
                   At Aurora Grand, we offer more than just a place to stay; we
                   provide an unforgettable experience. With modern architecture,
                   attentive service, and luxurious surroundings, our hotel is
@@ -130,52 +130,58 @@ const Home = () => {
 
               <Link
                 to="/rooms"
-                className="btn btn-lg btn-primary mx-auto mb-8 w-48"
+                className="inline-flex justify-center items-center h-[54px] px-8 bg-accent hover:bg-accent-hover text-white font-tertiary uppercase text-sm tracking-[3px] rounded-xl shadow-md transition-all active:scale-95"
               >
                 See our rooms
               </Link>
             </div>
 
             {/* right  */}
-            <div className="w-full h-full lg:w-[35%]">
+            <div className="w-full lg:w-[40%]">
               <img
                 src={introImg}
-                alt=""
-                className="object-cover h-[370px] w-full"
+                alt="Aurora Grand Lobby"
+                className="object-cover h-[380px] w-full rounded-3xl shadow-lg border border-slate-100/50 hover:scale-[1.01] transition-all duration-300"
               />
             </div>
           </div>
 
           {/* intro continue */}
-          <div className="h-[700px] overflow-hidden mt-12 shadow-lg">
+          <div className="h-[400px] lg:h-[650px] overflow-hidden mt-16 mx-6 rounded-3xl shadow-xl relative border border-slate-100">
             <img
               src={introImg1}
-              alt=""
-              className="w-full h-full object-cover"
+              alt="Aurora Grand Pool Area"
+              className="w-full h-full object-cover hover:scale-105 transition-transform duration-[6s]"
             />
+            <div className="absolute inset-0 bg-black/10"></div>
           </div>
 
           {/* services */}
-          <section className="pb-10">
-            <h3 className="h3 text-[45px] text-white text-center py-12 mb-12 bg-accent">
-              Our Services
-            </h3>
+          <section className="pt-24 pb-10">
+            <div className="text-center mb-16">
+              <span className="font-tertiary uppercase text-xs text-accent tracking-[6px] font-semibold">Luxury Services</span>
+              <h3 className="font-primary text-4xl text-slate-900 mt-2 relative inline-block pb-4">
+                Our Services
+                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-[2px] bg-accent/60"></span>
+              </h3>
+            </div>
 
             <div className="container mx-auto lg:px-0">
-              <div className="space-y-12">
+              <div className="space-y-20 px-6">
                 {/* Room service */}
                 <ScrollAnimation direction="left">
-                  <div className="flex flex-col lg:flex-row items-center lg:space-x-10">
+                  <div className="flex flex-col lg:flex-row items-center gap-10">
                     <div className="w-full lg:w-1/2">
                       <img
                         src={img9}
                         alt="Rooms"
-                        className="w-[90%] mb-4 lg:mb-0 h-72 object-cover rounded-2xl shadow-lg"
+                        className="w-full h-80 object-cover rounded-3xl shadow-md border border-slate-100 hover:scale-[1.01] transition-transform duration-300"
                       />
                     </div>
-                    <div className="w-full lg:w-1/2">
-                      <h3 className="h3 text-[30px]">Rooms</h3>
-                      <p className="px-5 text-gray-500 text-[18px]">
+                    <div className="w-full lg:w-1/2 lg:pl-6">
+                      <span className="font-tertiary uppercase text-xs text-accent tracking-[3px] font-semibold mb-2 block">Accommodation</span>
+                      <h3 className="font-primary text-3xl text-slate-800 mb-4">Rooms & Suites</h3>
+                      <p className="text-slate-500 font-secondary leading-relaxed text-base">
                         Aurora Grand’s rooms offer comfort and luxury, featuring
                         elegant designs, premium amenities, and breathtaking
                         views for a perfect stay.
@@ -186,17 +192,18 @@ const Home = () => {
 
                 {/* Pool service */}
                 <ScrollAnimation direction="right">
-                  <div className="flex flex-col lg:flex-row-reverse items-center lg:space-x-10 lg:space-x-reverse">
+                  <div className="flex flex-col lg:flex-row-reverse items-center gap-10">
                     <div className="w-full lg:w-1/2">
                       <img
                         src={pool}
                         alt="Pool"
-                        className="w-[90%] mb-4 lg:mb-0 h-72 object-cover rounded-2xl shadow-lg"
+                        className="w-full h-80 object-cover rounded-3xl shadow-md border border-slate-100 hover:scale-[1.01] transition-transform duration-300"
                       />
                     </div>
-                    <div className="w-full lg:w-1/2">
-                      <h3 className="h3 text-[30px]">Pool</h3>
-                      <p className="px-5 text-gray-500 text-[18px]">
+                    <div className="w-full lg:w-1/2 lg:pr-6">
+                      <span className="font-tertiary uppercase text-xs text-accent tracking-[3px] font-semibold mb-2 block">Recreation</span>
+                      <h3 className="font-primary text-3xl text-slate-800 mb-4">Infinity Pool</h3>
+                      <p className="text-slate-500 font-secondary leading-relaxed text-base">
                         Our expansive, crystal-clear pool is the ideal place to
                         unwind, have fun, and enjoy relaxing moments under the
                         sun.
@@ -207,17 +214,18 @@ const Home = () => {
 
                 {/* Dining service */}
                 <ScrollAnimation direction="left">
-                  <div className="flex flex-col lg:flex-row items-center lg:space-x-10">
+                  <div className="flex flex-col lg:flex-row items-center gap-10">
                     <div className="w-full lg:w-1/2">
                       <img
                         src={food}
                         alt="Dining"
-                        className="w-[90%] mb-4 lg:mb-0 h-72 object-cover rounded-2xl shadow-lg"
+                        className="w-full h-80 object-cover rounded-3xl shadow-md border border-slate-100 hover:scale-[1.01] transition-transform duration-300"
                       />
                     </div>
-                    <div className="w-full lg:w-1/2">
-                      <h3 className="h3 text-[30px]">Dining</h3>
-                      <p className="px-5 text-gray-500 text-[18px]">
+                    <div className="w-full lg:w-1/2 lg:pl-6">
+                      <span className="font-tertiary uppercase text-xs text-accent tracking-[3px] font-semibold mb-2 block">Gastronomy</span>
+                      <h3 className="font-primary text-3xl text-slate-800 mb-4">Fine Dining</h3>
+                      <p className="text-slate-500 font-secondary leading-relaxed text-base">
                         Enjoy exquisite dining at Aurora Grand with a diverse
                         menu that blends local flavors and international
                         cuisine, served in an elegant setting.
@@ -228,17 +236,18 @@ const Home = () => {
 
                 {/* Events and party service */}
                 <ScrollAnimation direction="right">
-                  <div className="flex flex-col lg:flex-row-reverse items-center lg:space-x-10 lg:space-x-reverse">
+                  <div className="flex flex-col lg:flex-row-reverse items-center gap-10">
                     <div className="w-full lg:w-1/2">
                       <img
                         src={party}
                         alt="Events & party"
-                        className="w-[90%] mb-4 lg:mb-0 h-72 object-cover rounded-2xl shadow-lg"
+                        className="w-full h-80 object-cover rounded-3xl shadow-md border border-slate-100 hover:scale-[1.01] transition-transform duration-300"
                       />
                     </div>
-                    <div className="w-full lg:w-1/2">
-                      <h3 className="h3 text-[30px]">Events & Party</h3>
-                      <p className="px-5 text-gray-500 text-[18px]">
+                    <div className="w-full lg:w-1/2 lg:pr-6">
+                      <span className="font-tertiary uppercase text-xs text-accent tracking-[3px] font-semibold mb-2 block">Celebrations</span>
+                      <h3 className="font-primary text-3xl text-slate-800 mb-4">Events & Banquets</h3>
+                      <p className="text-slate-500 font-secondary leading-relaxed text-base">
                         Aurora Grand is the perfect venue for hosting events and
                         parties. With flexible spaces and a professional team,
                         every event is crafted to be truly special.
@@ -249,17 +258,18 @@ const Home = () => {
 
                 {/* Spa service */}
                 <ScrollAnimation direction="left">
-                  <div className="flex flex-col lg:flex-row items-center lg:space-x-10">
+                  <div className="flex flex-col lg:flex-row items-center gap-10">
                     <div className="w-full lg:w-1/2">
                       <img
                         src={spa}
                         alt="Spa"
-                        className="w-[90%] mb-4 lg:mb-0 h-72 object-cover rounded-2xl shadow-lg"
+                        className="w-full h-80 object-cover rounded-3xl shadow-md border border-slate-100 hover:scale-[1.01] transition-transform duration-300"
                       />
                     </div>
-                    <div className="w-full lg:w-1/2">
-                      <h3 className="h3 text-[30px]">Spa</h3>
-                      <p className="px-5 text-gray-500 text-[18px]">
+                    <div className="w-full lg:w-1/2 lg:pl-6">
+                      <span className="font-tertiary uppercase text-xs text-accent tracking-[3px] font-semibold mb-2 block">Wellness</span>
+                      <h3 className="font-primary text-3xl text-slate-800 mb-4">Luxury Spa</h3>
+                      <p className="text-slate-500 font-secondary leading-relaxed text-base">
                         Indulge in ultimate relaxation at Aurora Grand’s spa,
                         offering rejuvenating treatments and therapies designed
                         to revitalize your body and mind in a tranquil
@@ -271,17 +281,18 @@ const Home = () => {
 
                 {/* Fitness service */}
                 <ScrollAnimation direction="right">
-                  <div className="flex flex-col lg:flex-row-reverse items-center lg:space-x-10 lg:space-x-reverse">
+                  <div className="flex flex-col lg:flex-row-reverse items-center gap-10">
                     <div className="w-full lg:w-1/2">
                       <img
                         src={fitness}
                         alt="Fitness"
-                        className="w-[90%] mb-4 lg:mb-0 h-72 object-cover rounded-2xl shadow-lg"
+                        className="w-full h-80 object-cover rounded-3xl shadow-md border border-slate-100 hover:scale-[1.01] transition-transform duration-300"
                       />
                     </div>
-                    <div className="w-full lg:w-1/2">
-                      <h3 className="h3 text-[30px]">Fitness Center</h3>
-                      <p className="px-5 text-gray-500 text-[18px]">
+                    <div className="w-full lg:w-1/2 lg:pr-6">
+                      <span className="font-tertiary uppercase text-xs text-accent tracking-[3px] font-semibold mb-2 block">Activity</span>
+                      <h3 className="font-primary text-3xl text-slate-800 mb-4">Fitness Center</h3>
+                      <p className="text-slate-500 font-secondary leading-relaxed text-base">
                         Stay fit and healthy in our well-equipped fitness
                         center, offering a variety of machines and workout
                         spaces to cater to your fitness routine.
@@ -296,94 +307,115 @@ const Home = () => {
       </section>
 
       {/* Discount Events Section */}
-      <section className="bg-gradient-to-r from-slate-400 to-slate-500 py-14">
+      <section className="bg-slate-950 py-20 relative overflow-hidden">
         <div className="container mx-auto lg:px-0">
-          <h3 className="h3 text-[45px] text-white text-center py-12">
-            Promotions
-          </h3>
+          <div className="text-center mb-16">
+            <span className="font-tertiary uppercase text-xs text-accent tracking-[6px] font-semibold">Special Offers</span>
+            <h3 className="font-primary text-4xl text-white mt-2 relative inline-block pb-4">
+              Promotions
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-[2px] bg-accent/60"></span>
+            </h3>
+          </div>
+
           {/* Promotion List */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mx-8">
+          <div className="px-6">
             {promotions.length > 0 ? (
-              promotions.map((promotion) => (
-                <div
-                  key={promotion.id}
-                  className="rounded-lg p-0 shadow-2xl bg-white flex flex-col"
-                >
-                  {/* Promotion Image - Chiếm nửa phần trên */}
-                  <div className="w-full h-52">
-                    <img
-                      src={promotion.promotionPhotoUrl}
-                      alt={promotion.description}
-                      className="w-full h-full object-cover rounded-t-lg"
-                    />
-                  </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {promotions.map((promotion) => (
+                  <div
+                    key={promotion.id}
+                    className="relative border border-white/5 rounded-2xl bg-white shadow-xl overflow-hidden flex flex-col hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group"
+                  >
+                    {/* Promotion Image & Percent Badge */}
+                    <div className="w-full h-48 relative overflow-hidden bg-slate-900">
+                      <img
+                        src={promotion.promotionPhotoUrl}
+                        alt={promotion.description}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute top-4 right-4 bg-rose-500 text-white font-bold text-xs px-2.5 py-1 rounded-lg shadow-sm">
+                        {promotion.percentOfDiscount}% OFF
+                      </div>
+                    </div>
 
-                  {/* Promotion Details */}
-                  <div className="p-6 flex flex-col flex-1">
-                    <h3 className="text-4xl font-semibold font-primary mb-4">
-                      {promotion.promotionTitle} -{" "}
-                      <span className="text-red-700">
-                        {promotion.percentOfDiscount}%
-                      </span>
-                    </h3>
-                    <p className="text-gray-600">{promotion.description}</p>
-                    <p className="text-sm">
-                      Room Types:{" "}
-                      <span className="font-medium">
-                        {promotion.listRoomTypes.join(", ")}
-                      </span>
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      Time: {promotion.startDate} to {promotion.endDate}
-                    </p>
-                  </div>
+                    {/* Promotion Details */}
+                    <div className="p-6 flex flex-col flex-1 bg-white">
+                      <h3 className="font-primary text-xl text-slate-800 mb-2 font-semibold">
+                        {promotion.promotionTitle}
+                      </h3>
+                      <p className="text-sm text-slate-500 mb-4 line-clamp-2 min-h-[40px]">
+                        {promotion.description}
+                      </p>
+                      
+                      <div className="mt-auto space-y-2 pt-4 border-t border-slate-100 text-xs text-slate-450">
+                        <div className="flex items-center justify-between">
+                          <span>Room Types:</span>
+                          <span className="font-semibold text-slate-700 text-right capitalize truncate max-w-[150px]">
+                            {promotion.listRoomTypes.join(", ")}
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span>Validity:</span>
+                          <span className="font-medium text-slate-600">
+                            {promotion.startDate} to {promotion.endDate}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
 
-                  {/* Action Buttons */}
-                  {/* <div className="flex justify-end space-x-4 mb-4 px-8">
-                    <Link
-                      to={`/admin/promotion/update/${promotion.id}`}
-                      className="bg-yellow-500 text-white px-4 py-2 rounded hover:opacity-80 transition"
-                    >
-                      <FaEdit size={20} />
-                    </Link>
-                    <button
-                      className="bg-red-500 text-white px-4 py-2 rounded hover:opacity-80 transition"
-                      onClick={() => handleDelete(promotion.id)}
-                    >
-                      <FaTrash size={20} />
-                    </button>
-                  </div> */}
-                </div>
-              ))
+                    {/* Dashed divider line for tear-off ticket look */}
+                    <div className="relative flex items-center px-5 bg-white py-1">
+                      <div className="w-full border-t border-dashed border-slate-200"></div>
+                      {/* Left Circle cutout - blends with dark slate-950 */}
+                      <div className="absolute -left-2.5 w-5 h-5 bg-slate-950 border-r border-slate-950/20 rounded-full"></div>
+                      {/* Right Circle cutout - blends with dark slate-950 */}
+                      <div className="absolute -right-2.5 w-5 h-5 bg-slate-950 border-l border-slate-950/20 rounded-full"></div>
+                    </div>
+
+                    {/* Action Button */}
+                    <div className="p-4 bg-slate-50/50 flex justify-center border-t border-slate-50">
+                      <Link
+                        to="/rooms"
+                        className="text-xs font-semibold text-accent hover:text-accent-hover tracking-wider uppercase transition-colors"
+                      >
+                        Book Rooms Now
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
             ) : (
-              <p className="text-gray-500 text-center">
+              <p className="text-slate-400 text-center py-12">
                 No promotions available.
               </p>
             )}
           </div>
         </div>
+
         {/* Pagination */}
-        <ReactPaginate
-          breakLabel="..."
-          nextLabel="NEXT →"
-          onPageChange={handlePageClick}
-          forcePage={page}
-          pageRangeDisplayed={5}
-          pageCount={totalPages}
-          previousLabel="← PREVIOUS"
-          className="flex space-x-2 items-center justify-center my-8"
-          pageClassName="page-item text-white"
-          pageLinkClassName="page-link px-4 py-2 hover:bg-gray-900/10 rounded-md shadow-2xl"
-          activeLinkClassName="active bg-white text-black"
-          previousClassName="page-item text-white"
-          previousLinkClassName="page-link hover:bg-gray-900/10 px-4 py-2 rounded-md"
-          nextClassName="page-item text-white"
-          nextLinkClassName="page-link hover:bg-gray-900/10 px-4 py-2 rounded-md"
-          breakClassName="page-item"
-          breakLinkClassName="page-link"
-          disabledLinkClassName="text-gray-400 cursor-not-allowed"
-          containerClassName="pagination"
-        />
+        <div className="flex justify-center mt-12">
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel="NEXT →"
+            onPageChange={handlePageClick}
+            forcePage={page}
+            pageRangeDisplayed={5}
+            pageCount={totalPages}
+            previousLabel="← PREVIOUS"
+            className="flex space-x-1.5 items-center justify-center"
+            pageClassName="page-item"
+            pageLinkClassName="px-3.5 py-2 border border-white/10 hover:bg-white/10 rounded-xl text-slate-350 text-sm font-medium transition-all"
+            activeLinkClassName="active bg-accent text-white border-accent hover:bg-accent-hover"
+            previousClassName="page-item"
+            previousLinkClassName="px-3.5 py-2 border border-white/10 hover:bg-white/10 rounded-xl text-slate-350 text-sm font-medium transition-all"
+            nextClassName="page-item"
+            nextLinkClassName="px-3.5 py-2 border border-white/10 hover:bg-white/10 rounded-xl text-slate-355 text-sm font-medium transition-all"
+            breakClassName="page-item"
+            breakLinkClassName="px-3.5 py-2 text-slate-600"
+            disabledLinkClassName="opacity-40 cursor-not-allowed hover:bg-transparent"
+            containerClassName="pagination"
+          />
+        </div>
       </section>
 
       {/* Ratings Section */}

@@ -18,15 +18,17 @@ const DashboardLayout = ({ children }) => {
           <div 
             className={`${
               isSidebarOpen ? 'block' : 'hidden'
-            } lg:block fixed lg:static z-40 top-0 left-0 w-[65%] lg:w-[20%] bg-neutral-700 px-2 py-4 transition-transform lg:transition-none`}
+            } lg:block fixed lg:static z-40 top-0 left-0 w-[65%] lg:w-[20%] bg-slate-900 border-r border-slate-800 shadow-xl px-4 py-6 transition-all duration-300 ease-in-out lg:transition-none min-h-screen`}
           >
             <Sidebar role={role} />
           </div>
 
           {/* Content area */}
-          <div className="w-full lg:w-[80%] bg-white">
+          <div className="w-full lg:w-[80%] bg-slate-50/50 min-h-screen flex flex-col min-w-0">
             <DashboardHeader toggleSidebar={toggleSidebar} /> {/* Pass the toggleSidebar function */}
-            {children}
+            <main className="flex-1 min-w-0">
+              {children}
+            </main>
           </div>
         </div>
 

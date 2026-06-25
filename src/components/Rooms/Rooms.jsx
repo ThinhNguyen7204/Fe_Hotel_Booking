@@ -99,18 +99,19 @@ const Rooms = () => {
         </div>
       )}
 
-      <div className="h-[600px] overflow-hidden relative">
+      <div className="h-[550px] overflow-hidden relative">
         <img
           src={introRoomPage}
-          alt=""
-          className="w-full h-full object-cover"
+          alt="Rooms & Suites"
+          className="w-full h-full object-cover scale-105"
         />
-        <div className="absolute inset-0 bg-black/30 z-10"></div>
-        <div className="absolute inset-0 z-20 flex flex-col justify-center items-center text-white">
-          <div className="font-tertiary uppercase text-[15px] tracking-[6px]">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/40 to-black/50 z-10"></div>
+        <div className="absolute inset-0 z-20 flex flex-col justify-center items-center text-white text-center px-4">
+          <div className="font-tertiary uppercase text-xs lg:text-sm tracking-[6px] text-accent font-semibold mb-2">
             Aurora Grand
           </div>
-          <h2 className="font-primary text-[45px] mb-4">Room & Suites</h2>
+          <h2 className="font-primary text-5xl lg:text-7xl tracking-wide mb-4">Rooms & Suites</h2>
+          <span className="w-16 h-[2px] bg-accent/60 mt-1"></span>
         </div>
       </div>
 
@@ -134,102 +135,89 @@ const Rooms = () => {
       </div>
 
       <div className="container mx-auto lg:px-0">
-        <div className="grid grid-cols-1 max-w-sm mx-auto gap-[30px] lg:grid-cols-3 lg:max-w-none lg:mx-0">
+        <div className="grid grid-cols-1 max-w-sm mx-auto gap-[30px] lg:grid-cols-3 lg:max-w-none lg:mx-0 px-6 lg:px-0">
           {/* Hiển thị các phòng tùy thuộc vào vai trò người dùng và ngày check-in/check-out */}
           {checkRoom && roomsAvailable ? (
             // Nếu có check-in/check-out, hiển thị roomsAvailable
             roomsAvailable.length === 0 ? (
-              <div className="text-center col-span-3">No rooms available.</div>
+              <div className="text-center col-span-3 text-slate-500 py-12 font-medium">No rooms available.</div>
             ) : (
               roomsAvailable.map((room, index) => (
                 <div
                   key={index}
-                  className="bg-white shadow-2xl min-h-[550px] group"
+                  className="bg-white rounded-3xl border border-slate-100 shadow-lg overflow-hidden flex flex-col hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group"
                 >
-                  <div className="overflow-hidden">
+                  <div className="overflow-hidden relative bg-slate-100 h-[250px]">
                     <img
-                      className="group-hover:scale-110 transition-all duration-300 h-[250px] w-full"
+                      className="group-hover:scale-105 transition-transform duration-500 h-full w-full object-cover"
                       src={room.roomPhotoUrl}
-                      alt=""
+                      alt={room.roomType}
                     />
-                  </div>
-                  <div className="bg-white shadow-lg max-w-[300px] mx-auto h-[60px] -translate-y-1/2 flex justify-center items-center uppercase font-tertiary tracking-[1px] font-semibold text-base">
-                    <div className="flex justify-between w-[80%]">
-                      <div className="flex items-center gap-x-2">
-                        <div className="text-accent">
-                          <BsArrowsFullscreen className="text-[15px]" />
-                        </div>
-                        <div className="flex gap-x-1">
-                          <div>size</div>
-                          <div>{room.roomSize}m²</div>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-x-2">
-                        <div className="text-accent">
-                          <BsPeople className="text-[18px]" />
-                        </div>
-                        <div className="flex gap-x-1">
-                          <div>max people</div>
-                          <div>{room.roomCapacity}</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {checkRoom && (
-                    <div className="flex justify-end px-6 pb-4">
-                      <div className="p-2 font-semibold bg-green-600 text-white rounded-lg">
+                    {checkRoom && room.remain !== undefined && (
+                      <div className="absolute top-4 left-4 bg-emerald-600 text-white font-semibold text-xs px-2.5 py-1 rounded-lg shadow-sm z-10">
                         Remain: {room.remain}
                       </div>
-                    </div>
-                  )}
-
-                  <div className="text-center">
-                    <Link to={`/rooms/${room.id}`}>
-                      <h3 className="h3">{room.roomType}</h3>
-                    </Link>
-                    <p className="max-w-[300px] mx-auto mb-3 lg:mb-6">
-                      {room.roomDescription.length > 100
-                        ? room.roomDescription.slice(0, 100) + "..."
-                        : room.roomDescription}
-                    </p>
-                    <div className="flex justify-center items-center gap-2 text-lg font-semibold">
-                      {room.percentOfDiscount > 0 && (
-                        <>
-                          {/* Giá gốc với gạch ngang */}
-                          <span className="text-gray-500 line-through mt-2">
-                            {room.roomPrice.toLocaleString("en-US")}₫
-                          </span>
-                          {room.percentOfDiscount > 0 && (
-                            <div className=" text-sm flex flex-col items-center">
-                              <div className="bg-red-500 text-white px-3 py-1 rounded-md font-semibold mt-2">
-                                -{room.percentOfDiscount}% Off
-                              </div>
-                            </div>
-                          )}
-                        </>
-                      )}
-                      {room.percentOfDiscount === 0 && (
-                        <span className="text-black">
-                          {room.roomPrice.toLocaleString("en-US")}₫
-                        </span>
-                      )}
-                    </div>
-                    {/* Giá sau khi giảm */}
+                    )}
                     {room.percentOfDiscount > 0 && (
-                      <span className="text-red-500 text-2xl">
-                        {room.newPrice.toLocaleString("en-US")}₫
-                      </span>
+                      <div className="absolute top-4 right-4 bg-rose-500 text-white font-bold text-xs px-2.5 py-1 rounded-lg shadow-sm z-10">
+                        -{room.percentOfDiscount}% Off
+                      </div>
                     )}
                   </div>
 
-                  <Link
-                    to={`/rooms/${room.id}`}
-                    className="btn btn-secondary btn-sm max-w-[240px] mx-auto mb-8 mt-1"
-                  >
-                    Book now
-                  </Link>
+                  <div className="p-6 flex flex-col flex-1 bg-white">
+                    {/* Specs Row */}
+                    <div className="flex gap-x-6 items-center text-xs uppercase tracking-wider text-slate-450 font-tertiary font-medium mb-3 border-b border-slate-100 pb-3">
+                      <div className="flex items-center gap-x-1.5">
+                        <BsArrowsFullscreen className="text-accent text-[13px]" />
+                        <span>{room.roomSize} m²</span>
+                      </div>
+                      <div className="flex items-center gap-x-1.5">
+                        <BsPeople className="text-accent text-[15px]" />
+                        <span>{room.roomCapacity} Guests</span>
+                      </div>
+                    </div>
+
+                    <Link to={`/rooms/${room.id}`}>
+                      <h3 className="font-primary text-2xl text-slate-900 mb-2 hover:text-accent transition-colors duration-200">
+                        {room.roomType}
+                      </h3>
+                    </Link>
+                    <p className="text-slate-500 font-secondary text-sm leading-relaxed mb-6 line-clamp-3 flex-1">
+                      {room.roomDescription}
+                    </p>
+
+                    {/* Price and Action Button Wrapper */}
+                    <div className="mt-auto pt-4 border-t border-slate-100 flex flex-col gap-y-4">
+                      <div className="flex items-baseline gap-x-2">
+                        {room.percentOfDiscount > 0 ? (
+                          <>
+                            <span className="text-xs text-slate-400 line-through">
+                              {room.roomPrice.toLocaleString("en-US")}₫
+                            </span>
+                            <span className="text-xl font-primary text-accent font-semibold">
+                              {room.newPrice.toLocaleString("en-US")}₫
+                            </span>
+                            <span className="text-[10px] text-slate-400 font-tertiary uppercase tracking-wider">/ Night</span>
+                          </>
+                        ) : (
+                          <>
+                            <span className="text-xl font-primary text-slate-900 font-semibold">
+                              {room.roomPrice.toLocaleString("en-US")}₫
+                            </span>
+                            <span className="text-[10px] text-slate-400 font-tertiary uppercase tracking-wider">/ Night</span>
+                          </>
+                        )}
+                      </div>
+
+                      <Link
+                        to={`/rooms/${room.id}`}
+                        className="w-full h-11 bg-slate-900 text-white font-tertiary uppercase text-xs tracking-[2px] rounded-xl flex items-center justify-center hover:bg-accent transition-all duration-300 shadow-sm active:scale-98"
+                      >
+                        Book now
+                      </Link>
+                    </div>
+                  </div>
                 </div>
               ))
             )
@@ -238,111 +226,105 @@ const Rooms = () => {
             rooms.map((room, index) => (
               <div
                 key={index}
-                className="bg-white shadow-2xl min-h-[500px] group"
+                className="bg-white rounded-3xl border border-slate-100 shadow-lg overflow-hidden flex flex-col hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group"
               >
-                <div className="overflow-hidden">
+                <div className="overflow-hidden relative bg-slate-100 h-[250px]">
                   <img
-                    className="group-hover:scale-110 transition-all duration-300 h-[250px] w-full"
+                    className="group-hover:scale-105 transition-transform duration-500 h-full w-full object-cover"
                     src={room.roomPhotoUrl}
-                    alt=""
+                    alt={room.roomType}
                   />
-                </div>
-                <div className="bg-white shadow-lg max-w-[300px] mx-auto h-[60px] -translate-y-1/2 flex justify-center items-center uppercase font-tertiary tracking-[1px] font-semibold text-base">
-                  <div className="flex justify-between w-[80%]">
-                    <div className="flex items-center gap-x-2">
-                      <div className="text-accent">
-                        <BsArrowsFullscreen className="text-[15px]" />
-                      </div>
-                      <div className="flex gap-x-1">
-                        <div>size</div>
-                        <div>{room.roomSize}m²</div>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-x-2">
-                      <div className="text-accent">
-                        <BsPeople className="text-[18px]" />
-                      </div>
-                      <div className="flex gap-x-1">
-                        <div>max people</div>
-                        <div>{room.roomCapacity}</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="text-center">
-                  <Link to={`/rooms/${room.id}`}>
-                    <h3 className="h3">{room.roomType}</h3>
-                  </Link>
-                  <p className="max-w-[300px] mx-auto mb-3 lg:mb-6">
-                    {room.roomDescription.length > 100
-                      ? room.roomDescription.slice(0, 100) + "..."
-                      : room.roomDescription}
-                  </p>
-                  <div className="flex justify-center items-center gap-2 text-lg font-semibold">
-                    {room.percentOfDiscount > 0 && (
-                      <>
-                        {/* Giá gốc với gạch ngang */}
-                        <span className="text-gray-500 line-through mt-2">
-                          {room.roomPrice.toLocaleString("en-US")}₫
-                        </span>
-                        {room.percentOfDiscount > 0 && (
-                          <div className=" text-sm flex flex-col items-center">
-                            <div className="bg-red-500 text-white px-3 py-1 rounded-md font-semibold mt-2">
-                              -{room.percentOfDiscount}% Off
-                            </div>
-                          </div>
-                        )}
-                      </>
-                    )}
-                    {room.percentOfDiscount === 0 && (
-                      <span className="text-black">
-                        {room.roomPrice.toLocaleString("en-US")}₫
-                      </span>
-                    )}
-                  </div>
-                  {/* Giá sau khi giảm */}
                   {room.percentOfDiscount > 0 && (
-                    <span className="text-red-500 text-2xl">
-                      {room.newPrice.toLocaleString("en-US")}₫
-                    </span>
+                    <div className="absolute top-4 right-4 bg-rose-500 text-white font-bold text-xs px-2.5 py-1 rounded-lg shadow-sm z-10">
+                      -{room.percentOfDiscount}% Off
+                    </div>
                   )}
                 </div>
-                <Link
-                  to={`/rooms/${room.id}`}
-                  className="btn btn-secondary btn-sm max-w-[240px] mx-auto mb-8 mt-5"
-                >
-                  Book now
-                </Link>
+
+                <div className="p-6 flex flex-col flex-1 bg-white">
+                  {/* Specs Row */}
+                  <div className="flex gap-x-6 items-center text-xs uppercase tracking-wider text-slate-450 font-tertiary font-medium mb-3 border-b border-slate-100 pb-3">
+                    <div className="flex items-center gap-x-1.5">
+                      <BsArrowsFullscreen className="text-accent text-[13px]" />
+                      <span>{room.roomSize} m²</span>
+                    </div>
+                    <div className="flex items-center gap-x-1.5">
+                      <BsPeople className="text-accent text-[15px]" />
+                      <span>{room.roomCapacity} Guests</span>
+                    </div>
+                  </div>
+
+                  <Link to={`/rooms/${room.id}`}>
+                    <h3 className="font-primary text-2xl text-slate-900 mb-2 hover:text-accent transition-colors duration-200">
+                      {room.roomType}
+                    </h3>
+                  </Link>
+                  <p className="text-slate-500 font-secondary text-sm leading-relaxed mb-6 line-clamp-3 flex-1">
+                    {room.roomDescription}
+                  </p>
+
+                  {/* Price and Action Button Wrapper */}
+                  <div className="mt-auto pt-4 border-t border-slate-100 flex flex-col gap-y-4">
+                    <div className="flex items-baseline gap-x-2">
+                      {room.percentOfDiscount > 0 ? (
+                        <>
+                          <span className="text-xs text-slate-400 line-through">
+                            {room.roomPrice.toLocaleString("en-US")}₫
+                          </span>
+                          <span className="text-xl font-primary text-accent font-semibold">
+                            {room.newPrice.toLocaleString("en-US")}₫
+                          </span>
+                          <span className="text-[10px] text-slate-400 font-tertiary uppercase tracking-wider">/ Night</span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="text-xl font-primary text-slate-900 font-semibold">
+                            {room.roomPrice.toLocaleString("en-US")}₫
+                          </span>
+                          <span className="text-[10px] text-slate-400 font-tertiary uppercase tracking-wider">/ Night</span>
+                        </>
+                      )}
+                    </div>
+
+                    <Link
+                      to={`/rooms/${room.id}`}
+                      className="w-full h-11 bg-slate-900 text-white font-tertiary uppercase text-xs tracking-[2px] rounded-xl flex items-center justify-center hover:bg-accent transition-all duration-300 shadow-sm active:scale-98"
+                    >
+                      Book now
+                    </Link>
+                  </div>
+                </div>
               </div>
             ))
           ) : (
-            <p className="text-center col-span-3">No rooms available.</p>
+            <p className="text-center col-span-3 text-slate-500 py-12 font-medium">No rooms available.</p>
           )}
         </div>
       </div>
 
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel="NEXT →"
-        onPageChange={handlePageClick}
-        forcePage={checkRoom ? pageAvailable : page} // Đảm bảo phản ánh đúng trạng thái trang hiện tại
-        pageRangeDisplayed={5}
-        pageCount={totalPages}
-        previousLabel="← PREVIOUS"
-        className="flex space-x-2 items-center justify-center my-8"
-        pageClassName="page-item"
-        pageLinkClassName="page-link px-4 py-2 hover:bg-gray-900/10 rounded-md shadow-2xl"
-        activeLinkClassName="active bg-black text-white" // Active page style
-        previousClassName="page-item"
-        previousLinkClassName="page-link hover:bg-gray-900/10 px-4 py-2 rounded-md"
-        nextClassName="page-item"
-        nextLinkClassName="page-link hover:bg-gray-900/10 px-4 py-2 rounded-md"
-        breakClassName="page-item"
-        breakLinkClassName="page-link"
-        disabledLinkClassName="text-gray-400 cursor-not-allowed"
-        containerClassName="pagination"
-      />
+      <div className="flex justify-center mt-16 mb-8">
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="NEXT →"
+          onPageChange={handlePageClick}
+          forcePage={checkRoom ? pageAvailable : page}
+          pageRangeDisplayed={5}
+          pageCount={totalPages}
+          previousLabel="← PREVIOUS"
+          className="flex space-x-1.5 items-center justify-center"
+          pageClassName="page-item"
+          pageLinkClassName="px-3.5 py-2 border border-slate-200 hover:bg-slate-50 rounded-xl text-slate-600 text-sm font-medium transition-all"
+          activeLinkClassName="active bg-accent text-white border-accent hover:bg-accent-hover"
+          previousClassName="page-item"
+          previousLinkClassName="px-3.5 py-2 border border-slate-200 hover:bg-slate-50 rounded-xl text-slate-600 text-sm font-medium transition-all"
+          nextClassName="page-item"
+          nextLinkClassName="px-3.5 py-2 border border-slate-200 hover:bg-slate-50 rounded-xl text-slate-600 text-sm font-medium transition-all"
+          breakClassName="page-item"
+          breakLinkClassName="px-3.5 py-2 text-slate-400"
+          disabledLinkClassName="opacity-40 cursor-not-allowed hover:bg-transparent"
+          containerClassName="pagination"
+        />
+      </div>
     </section>
   );
 };

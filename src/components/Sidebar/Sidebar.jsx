@@ -29,149 +29,138 @@ const Sidebar = () => {
 
   // Hàm tạo class cho các NavLink
   const getNavLinkClass = (isActive) =>
-    `flex items-center gap-3 mb-2 p-4 rounded-lg text-white hover:bg-accent hover:scale-105 text-[17px] font-medium transition-all duration-300 ease-in-out ${
-      isActive ? "text-white bg-accent" : ""
+    `flex items-center gap-3.5 mb-2 px-4 py-3 rounded-xl text-[15px] font-medium transition-all duration-300 ease-in-out ${
+      isActive
+        ? "text-white bg-gradient-to-r from-indigo-600 to-violet-600 shadow-md shadow-indigo-600/20"
+        : "text-slate-400 hover:text-white hover:bg-slate-800/50"
     }`;
 
   return (
     <>
-      <section className="flex flex-col min-h-screen">
-        {/* Logo và tên khách sạn */}
-        <NavLink to="/" className="flex items-center mb-6">
-          <div className="w-16">
-            <img src={Logo} alt="Logo" />
-          </div>
-          <div className="pl-2 text-[25px] font-primary text-white">
-            Aurora Grand
-          </div>
-        </NavLink>
-
-        {/* Các mục điều hướng của Sidebar */}
-        <div>
-          <NavLink
-            to="/dashboard"
-            className={({ isActive }) => getNavLinkClass(isActive)}
-          >
-            <CiGrid41 size={22} />
-            <span>Dashboard</span>
+      <section className="flex flex-col h-[calc(100vh-2rem)] justify-between">
+        <div className="flex flex-col">
+          {/* Logo và tên khách sạn */}
+          <NavLink to="/" className="flex items-center mb-8 px-2 transition-opacity hover:opacity-90">
+            <div className="w-10 h-10 rounded-xl overflow-hidden bg-white/10 flex items-center justify-center border border-white/10 shadow-inner">
+              <img src={Logo} alt="Logo" className="w-8 h-8 object-cover" />
+            </div>
+            <div className="pl-3 text-[18px] font-bold text-white tracking-wide">
+              Aurora Grand
+            </div>
           </NavLink>
 
-          {/* Mục hiển thị cho Admin */}
-          {user?.role === "ADMIN" && (
-            <>
-              {/* <NavLink to="/admin/createroom" className={({ isActive }) => getNavLinkClass(isActive)}>
-                <FaPlusCircle size={22} />
-                <span>Create Room</span>
-              </NavLink> */}
+          {/* Các mục điều hướng của Sidebar */}
+          <nav className="flex flex-col space-y-1">
+            {/* Mục hiển thị cho Admin */}
+            {user?.role === "ADMIN" && (
+              <>
+                <NavLink
+                  to="/dashboard"
+                  className={({ isActive }) => getNavLinkClass(isActive)}
+                >
+                  <CiGrid41 size={20} />
+                  <span>Dashboard</span>
+                </NavLink>
 
-              <NavLink
-                to="/admin/userlist"
-                className={({ isActive }) => getNavLinkClass(isActive)}
-              >
-                <FiUser size={22} />
-                <span>All Users</span>
-              </NavLink>
+                <NavLink
+                  to="/admin/userlist"
+                  className={({ isActive }) => getNavLinkClass(isActive)}
+                >
+                  <FiUser size={20} />
+                  <span>All Users</span>
+                </NavLink>
 
-              <NavLink
-                to="/admin/roomlist"
-                className={({ isActive }) => getNavLinkClass(isActive)}
-              >
-                <MdOutlineBedroomParent size={22} />
-                <span>All Rooms List</span>
-              </NavLink>
+                <NavLink
+                  to="/admin/roomlist"
+                  className={({ isActive }) => getNavLinkClass(isActive)}
+                >
+                  <MdOutlineBedroomParent size={20} />
+                  <span>All Rooms List</span>
+                </NavLink>
 
-              <NavLink
-                to="/admin/booking-history"
-                className={({ isActive }) => getNavLinkClass(isActive)}
-              >
-                <FaHistory size={22} />
-                <span>Booking History</span>
-              </NavLink>
+                <NavLink
+                  to="/admin/booking-history"
+                  className={({ isActive }) => getNavLinkClass(isActive)}
+                >
+                  <FaHistory size={20} />
+                  <span>Booking History</span>
+                </NavLink>
 
-              <NavLink
-                to="/admin/booking-late-payments"
-                className={({ isActive }) => getNavLinkClass(isActive)}
-              >
-                <FaHistory size={22} />
-                <span>Booking Late Payment</span>
-              </NavLink>
+                <NavLink
+                  to="/admin/booking-late-payments"
+                  className={({ isActive }) => getNavLinkClass(isActive)}
+                >
+                  <FaHistory size={20} />
+                  <span>Late Payments</span>
+                </NavLink>
 
-              <NavLink
-                to="/admin/promotion"
-                className={({ isActive }) => getNavLinkClass(isActive)}
-              >
-                <MdOutlineCategory size={22} />
-                <span>Promotion</span>
-              </NavLink>
+                <NavLink
+                  to="/admin/promotion"
+                  className={({ isActive }) => getNavLinkClass(isActive)}
+                >
+                  <MdOutlineCategory size={20} />
+                  <span>Promotions</span>
+                </NavLink>
 
-              <NavLink
-                to="/admin/report"
-                className={({ isActive }) => getNavLinkClass(isActive)}
-              >
-                <TbCurrencyDollar size={22} />
-                <span>Report</span>
-              </NavLink>
-            </>
-          )}
+                <NavLink
+                  to="/admin/report"
+                  className={({ isActive }) => getNavLinkClass(isActive)}
+                >
+                  <TbCurrencyDollar size={20} />
+                  <span>Reports</span>
+                </NavLink>
+              </>
+            )}
 
-          {/* Mục hiển thị cho User */}
-          {user?.role === "USER" && (
-            <>
-              {/* <NavLink to="/payment" className={({ isActive }) => getNavLinkClass(isActive)}>
-                <TbCurrencyDollar size={22} />
-                <span>Payment</span>
-              </NavLink> */}
+            {/* Mục hiển thị cho User */}
+            {user?.role === "USER" && (
+              <>
+                <NavLink
+                  to="/recent-booking"
+                  className={({ isActive }) => getNavLinkClass(isActive)}
+                >
+                  <TbCurrencyDollar size={20} />
+                  <span>Recent Booking</span>
+                </NavLink>
 
-              <NavLink
-                to="/recent-booking"
-                className={({ isActive }) => getNavLinkClass(isActive)}
-              >
-                <TbCurrencyDollar size={22} />
-                <span>Recent Booking</span>
-              </NavLink>
+                <NavLink
+                  to="/booking-history"
+                  className={({ isActive }) => getNavLinkClass(isActive)}
+                >
+                  <FaHistory size={20} />
+                  <span>Booking History</span>
+                </NavLink>
 
-              <NavLink
-                to="/booking-history"
-                className={({ isActive }) => getNavLinkClass(isActive)}
-              >
-                <FaHistory size={22} />
-                <span>Booking History</span>
-              </NavLink>
+                <NavLink
+                  to="/user-review"
+                  className={({ isActive }) => getNavLinkClass(isActive)}
+                >
+                  <FaStar size={20} />
+                  <span>My Reviews</span>
+                </NavLink>
+              </>
+            )}
 
-              <NavLink
-                to="/user-review"
-                className={({ isActive }) => getNavLinkClass(isActive)}
-              >
-                <FaStar size={22} />
-                <span>Review</span>
-              </NavLink>
-
-              {/* <NavLink to="/favorites" className={({ isActive }) => getNavLinkClass(isActive)}>
-                <IoIosHeartEmpty size={22} />
-                <span>My Favorites</span>
-              </NavLink> */}
-            </>
-          )}
-
-          {/* Mục Profile cho cả User và Admin */}
-          <NavLink
-            to="/profile"
-            className={({ isActive }) => getNavLinkClass(isActive)}
-          >
-            <IoSettingsOutline size={22} />
-            <span>Personal Profile</span>
-          </NavLink>
-
-          {/* Nút Logout */}
-          <div className="flex items-center justify-center m-5 hover:opacity-60 text-center">
-            <button
-              onClick={() => setModalOpen(true)}
-              className="flex items-center gap-3 text-white bg-red-500 py-4 px-12 rounded-full"
+            {/* Mục Profile cho cả User và Admin */}
+            <NavLink
+              to="/profile"
+              className={({ isActive }) => getNavLinkClass(isActive)}
             >
-              <IoIosLogOut size={22} />
-              <span>Log Out</span>
-            </button>
-          </div>
+              <IoSettingsOutline size={20} />
+              <span>Personal Profile</span>
+            </NavLink>
+          </nav>
+        </div>
+
+        {/* Nút Logout đẩy xuống dưới cùng */}
+        <div className="pt-4 border-t border-slate-800/80 px-2 mt-auto">
+          <button
+            onClick={() => setModalOpen(true)}
+            className="w-full flex items-center justify-center gap-2.5 text-slate-400 hover:text-white bg-slate-800/40 hover:bg-red-600/10 border border-slate-850 hover:border-red-500/20 py-2.5 px-4 rounded-xl transition-all duration-300 ease-in-out text-[14px] font-semibold group"
+          >
+            <IoIosLogOut size={18} className="transition-transform group-hover:translate-x-0.5" />
+            <span>Log Out</span>
+          </button>
         </div>
 
         {/* Modal xác nhận logout */}
